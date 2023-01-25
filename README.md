@@ -6,7 +6,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of BREAD is to calculate kinship from SNP data.
+The goal of BREAD is to provide an easy-to-use method for estimating
+degrees of relatedness (up to the second degree) for extrememly
+low-coverage data. BREAD also allows users to quantify and visualise the
+level of confidence in the estimated degrees of relatedness.
 
 ## Installation
 
@@ -20,9 +23,10 @@ devtools::install_github("jonotuke/BREAD")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This basic example shows you how to analyse a real (anonymised) ancient
+DNA data set.
 
-First we load a basic counts example.
+First we load a raw counts example.
 
 ``` r
 library(BREAD)
@@ -45,7 +49,8 @@ counts_example
 #> 15 Ind5 - Ind6  1739      383 0.2202415
 ```
 
-We can get the call of kin using
+We can we can estimate the degrees of relatedness from the raw counts
+using
 
 ``` r
 relatedness_example <- callRelatedness(counts_example)
@@ -73,16 +78,21 @@ relatedness_example
 #> #   ⁴​First_Degree
 ```
 
+An overall picture of the relatedness for these individuals can be
+created using
+
 ``` r
 plotLOAF(relatedness_example)
 #> No minimum number of overlapping SNPs given.
 #> Using default minimum of 500.
 #> No upper limit on number of pairs to plot given.
 #> Plotting first 15 pairs.
-#> Warning: Ignoring unknown parameters: linewidth
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+A diagnostic plot for the assignment of the “Unrelated” degree of
+relatedness to individuals Ind1 and Ind2 can be produced using
 
 ``` r
 plotSLICE(relatedness_example, row = 1)
@@ -96,19 +106,30 @@ plotSLICE(relatedness_example, row = 1)
     #> 2 2 (2-2,2-2) arrange      gtable[layout]
     #> 3 3 (1-1,1-2) arrange text[GRID.text.170]
 
-``` r
-saveSLICES(relatedness_example)
-```
+Alternatively we can call
 
 ``` r
-test_degree(relatedness_example, 1, 1)
-#> Testing H0       : "Ind1 - Ind2" are 1st-degree relatives.
-#> Expected PMR     : 0.1635
+plotSLICE(relatedness_example, row = "Ind1 - Ind2")
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+    #> TableGrob (2 x 2) "arrange": 3 grobs
+    #>   z     cells    name                grob
+    #> 1 1 (2-2,1-1) arrange      gtable[layout]
+    #> 2 2 (2-2,2-2) arrange      gtable[layout]
+    #> 3 3 (1-1,1-2) arrange text[GRID.text.271]
+
+We can test whether the observed PMR between Ind1 and Ind2 is consistent
+with a 3rd-degree genetic relationship,or not, using
+
+``` r
+test_degree(relatedness_example, 1, 3)
+#> Testing H0       : "Ind1 - Ind2" are 3rd-degree relatives.
+#> Expected PMR     : 0.2044
 #> Observed PMR     : 0.2042
 #> Estimated degree : 2.9826
-#> p-value          : 2.666909e-05
-#> Decision         : Reject H0
-#> [1] 2.666909e-05
+#> p-value          : 1.0177
+#> Decision         : Retain H0
+#> [1] 1.017684
 ```
-
-This is new
