@@ -110,3 +110,5 @@ test_degree(relatedness_example, 1, 1)
 #> Decision         : Reject H0
 #> [1] 2.666909e-05
 ```
+
+This is new
