@@ -16,14 +16,14 @@ Authors@R:
       family = "Rohrlach",
       email = "adam.rohrlach@adelaide.edu.au", 
       role = "aut",
-      comment = c(ORCID = "??")
+      comment = c(ORCID = "0000-0002-4204-5018")
     ), 
     person(
       given = "Wolfgang", 
       family = "Haak",
       email = "wolfgang_haak@eva.mpg.de", 
       role = "aut",
-      comment = c(ORCID = "??")
+      comment = c(ORCID = "0000-0003-2475-2007")
     ) 
     )
 Description: The goal of BREAD is to provide an easy-to-use method 
