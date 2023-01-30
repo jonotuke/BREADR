@@ -47,7 +47,13 @@ test_degree <- function(in_tibble,row,degree,printResults=TRUE){
   N <- in_tibble$nsnps[row]
   x <- in_tibble$mismatch[row]
   pair <- in_tibble$pair[row]
-  pval <- 2*stats::pbinom(x,N,pk,ifelse(x>pk*N,F,T))
+  # pval <- 2*stats::pbinom(x,N,pk,ifelse(x>pk*N,F,T))
+  pval <- min(
+    c(
+      2*stats::pbinom(x,N,pk,T),
+      2*stats::pbinom(x,N,pk,F)
+    )
+  )
   # CI <- x/N+c(-1,1)*1.96*sqrt(x/N*(1-x/N)/N)
   pvaltext <- ifelse(pval<0.0001,
                      sprintf('p-value          : %s\n',format(pval,scientific=T)),

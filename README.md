@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 The goal of BREAD is to provide an easy-to-use method for estimating
-degrees of relatedness (up to the second degree) for extrememly
+degrees of relatedness (up to the second degree) for extremely
 low-coverage data. BREAD also allows users to quantify and visualise the
 level of confidence in the estimated degrees of relatedness.
 
@@ -129,7 +129,7 @@ test_degree(relatedness_example, 1, 3)
 #> Expected PMR     : 0.2044
 #> Observed PMR     : 0.2042
 #> Estimated degree : 2.9826
-#> p-value          : 1.0177
+#> p-value          : 0.9823
 #> Decision         : Retain H0
-#> [1] 1.017684
+#> [1] 0.9823165
 ```
