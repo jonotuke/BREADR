@@ -27,7 +27,8 @@ processEigenstrat(
 
 \item{filter_deam}{a TRUE/FALSE for if C->T and G->A sites should be ignored.}
 
-\item{outfile}{a path and filename to which we can save the output of the function as a TSV, if NULL, no back up saved.}
+\item{outfile}{(OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
+if NULL, no back up saved. If no outfile, then a tibble is returned.}
 }
 \value{
 out_tibble: A tibble containing four columns:
@@ -39,6 +40,7 @@ Options include choosing thinning parameter, subsetting by population names,
 and filtering out SNPs for which deamination is possible.
 }
 \examples{
+# Use internal files to the package as an example
 indfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
 genofile <- system.file("extdata", "example.geno.txt", package = "BREAD")
 snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")

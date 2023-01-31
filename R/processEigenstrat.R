@@ -11,7 +11,8 @@
 #' @param filter_length the minimum distance between sites to be compared (to reduce the effect of LD).
 #' @param pop_pattern a character vector of population names to filter the ind file if only some populations are to compared.
 #' @param filter_deam a TRUE/FALSE for if C->T and G->A sites should be ignored.
-#' @param outfile a path and filename to which we can save the output of the function as a TSV, if NULL, no back up saved.
+#' @param outfile (OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
+#' if NULL, no back up saved. If no outfile, then a tibble is returned.
 #'
 #' @return out_tibble: A tibble containing four columns:
 # - pair [char]: the pair of individuals that are compared.
@@ -21,6 +22,7 @@
 #' @export
 #'
 #' @examples
+#' # Use internal files to the package as an example
 #' indfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
 #' genofile <- system.file("extdata", "example.geno.txt", package = "BREAD")
 #' snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")
@@ -55,8 +57,13 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   }
 
   # Check if all pop_names are in the possible populations.
-  ind_raw <- readr::read_table(indfile,col_names=c('ind','sex','pop'),
-                               col_types=c('ccc'))
+  # Change to delim so works in different countries.
+  ind_raw <- readr::read_delim(
+    indfile,
+    col_names=c('ind','sex','pop'),
+    col_types=c('ccc'),
+    delim = "\t"
+  )
   if(!all(pop_pattern%in%ind_raw$pop)){
     paste0('Following populations in pop_pattern do not exist in indfile: ',
            paste0(setdiff(pop_pattern,ind_raw$pop),collapse=', ')) %>%
@@ -78,8 +85,12 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   # Collect SNP details
   cat('Reading in SNP data.\n')
   if(filter_deam){
-    snps <- readr::read_table(snpfile,col_names=c('snp','chr','pos','site','anc','der'),
-                              col_types=c('cdddcc')) %>%
+    snps <- readr::read_delim(
+      snpfile,
+      col_names=c('snp','chr','pos','site','anc','der'),
+      col_types=c('cdddcc'),
+      delim = "\t"
+    ) %>%
       dplyr::mutate(relative_pos=1:dplyr::n()) %>%
       dplyr::mutate(deam=dplyr::case_when(anc=='C'&der=='T' ~ T,
                                    anc=='G'&der=='A' ~ T,
@@ -87,8 +98,12 @@ processEigenstrat <- function(indfile, genofile, snpfile,
       dplyr::filter(!deam) %>%
       dplyr::select(-deam)
   }else{
-    snps <- readr::read_table(snpfile,col_names=c('snp','chr','pos','site','anc','der'),
-                              col_types=c('cdddcc')) %>%
+    snps <- readr::read_delim(
+      snpfile,
+      col_names=c('snp','chr','pos','site','anc','der'),
+      col_types=c('cdddcc'),
+      delim = "\t"
+    ) %>%
       dplyr::mutate(relative_pos=1:dplyr::n())
   }
   # Collect (potentially filtered) ind details

@@ -95,7 +95,8 @@ and filtering out SNPs for which deamination is possible.</p>
 
 
 <dt>outfile</dt>
-<dd><p>a path and filename to which we can save the output of the function as a TSV, if NULL, no back up saved.</p></dd>
+<dd><p>(OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
+if NULL, no back up saved. If no outfile, then a tibble is returned.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -107,7 +108,8 @@ and filtering out SNPs for which deamination is possible.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">indfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example.ind.txt"</span>, package <span class="op">=</span> <span class="st">"BREAD"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Use internal files to the package as an example</span></span></span>
+<span class="r-in"><span><span class="va">indfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example.ind.txt"</span>, package <span class="op">=</span> <span class="st">"BREAD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">genofile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example.geno.txt"</span>, package <span class="op">=</span> <span class="st">"BREAD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">snpfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"example.snp.txt"</span>, package <span class="op">=</span> <span class="st">"BREAD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">processEigenstrat</span><span class="op">(</span></span></span>
