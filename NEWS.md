@@ -1,5 +1,7 @@
 # BREAD 1.0.0
 
+This is the version that we released to CRAN. 
+
 # BREAD 0.0.0.9000
 
 ## Major changes
