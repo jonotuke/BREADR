@@ -1,3 +1,7 @@
 # BREAD 0.0.0.9000
 
-* Added a `NEWS.md` file to track changes to the package.
+## Major changes
+
+* This is the first development version. It has the primary functions. 
+* Also set up a pkgdown website to support. 
+
