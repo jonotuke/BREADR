@@ -128,6 +128,7 @@ plotSLICE <- function(in_tibble,row,title=NULL,class_prior=rep(1/4,4),showPlot=T
                    colour=model))+
     ggplot2::ylab("Posterior Probability")+
     ggplot2::xlab('Model')+
+    ggplot2::scale_x_discrete(guide=ggplot2::guide_axis(n.dodge=2))+
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(),
           panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))
 

@@ -174,7 +174,7 @@ plotSLICE(relatedness_example, row = 1)
     #>   z     cells    name                grob
     #> 1 1 (2-2,1-1) arrange      gtable[layout]
     #> 2 2 (2-2,2-2) arrange      gtable[layout]
-    #> 3 3 (1-1,1-2) arrange text[GRID.text.170]
+    #> 3 3 (1-1,1-2) arrange text[GRID.text.172]
 
 Alternatively we can choose the row using the full pair name instead of
 the row number.
@@ -189,7 +189,7 @@ plotSLICE(relatedness_example, row = "Ind1 - Ind2")
     #>   z     cells    name                grob
     #> 1 1 (2-2,1-1) arrange      gtable[layout]
     #> 2 2 (2-2,2-2) arrange      gtable[layout]
-    #> 3 3 (1-1,1-2) arrange text[GRID.text.271]
+    #> 3 3 (1-1,1-2) arrange text[GRID.text.275]
 
 We can test whether the observed PMR between Ind1 and Ind2 is consistent
 with a 3rd-degree genetic relationship, or not, but any degree of
