@@ -5,7 +5,7 @@ utils::globalVariables(c("deam", "pop", "chr",
                          "Unrelated", "normConst", "relationship", "pair",
                          "n", "sd", "everything", "col_names_tibble",
                          "meanPMR", "ymin", "ymax", "model", "p.sim", "y",
-                         "posterior"))
+                         "posterior", "label"))
 getfilter <- function(x,gap){
   i <- 1
   res <- c(1)

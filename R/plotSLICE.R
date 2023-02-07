@@ -140,12 +140,27 @@ plotSLICE <- function(
   posterior.tibble <- tibble::tibble(posterior=c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior/
                                        sum(c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior),
                                      model=factor(kclasses,levels=kclasses))
+  posterior.tibble <- posterior.tibble |>
+    dplyr::mutate(
+      label = ifelse(
+        posterior >= 0.01,
+        round(posterior, 2),
+        stringr::str_replace(
+          formatC(posterior, digits = 2, format = "e"),
+          "e", " %*% 10^"
+        )
+      )
+    )
   posterior.plot <- posterior.tibble %>%
     ggplot2::ggplot(ggplot2::aes(x=model,y=posterior))+
     ggplot2::theme_bw()+
     ggplot2::geom_bar(stat='identity',ggplot2::aes(fill=model),col='black',alpha=0.8)+
-    ggplot2::geom_label(ggplot2::aes(label=ifelse(posterior>=0.01,round(posterior,2),formatC(posterior,digits=2,format="e")),
-                   colour=model))+
+    ggplot2::geom_label(
+      ggplot2::aes(
+        label=label,
+        colour=model
+      ), parse = TRUE
+    )+
     ggplot2::ylab("Posterior Probability")+
     ggplot2::xlab('Model')+
     ggplot2::scale_x_discrete(guide=ggplot2::guide_axis(n.dodge=2))+
