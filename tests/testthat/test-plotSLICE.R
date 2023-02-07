@@ -7,4 +7,5 @@ test_that("plotSLICE errors", {
   expect_error(plotSLICE(false_example1))
   expect_error(plotSLICE(relatedness_example))
   expect_error(plotSLICE(relatedness_example, row = 100))
+  expect_error(plotSLICE(relatedness_example, row = 1, labels = "a"))
 })

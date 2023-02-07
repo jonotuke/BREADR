@@ -24,7 +24,13 @@ Authors@R:
       email = "wolfgang_haak@eva.mpg.de", 
       role = "aut",
       comment = c(ORCID = "0000-0003-2475-2007")
-    ) 
+    ), 
+    person(
+      given = "Divyaratan",
+      family = "Popli",
+      email = "divyaratan_popli@eva.mpg.de",
+      role = "aut"
+    )
     )
 Description: The goal of BREAD is to provide an easy-to-use method 
   for estimating degrees of relatedness (up to the second degree) 
@@ -47,8 +53,8 @@ Imports:
     dplyr,
     forcats,
     ggplot2,
+    ggpubr,
     grDevices,
-    gridExtra,
     magrittr,
     matrixStats,
     readr,

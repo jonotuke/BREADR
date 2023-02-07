@@ -9,7 +9,9 @@ plotSLICE(
   row,
   title = NULL,
   class_prior = rep(1/4, 4),
-  showPlot = T
+  showPlot = TRUE,
+  which_plot = 0,
+  labels = NULL
 )
 }
 \arguments{
@@ -25,6 +27,13 @@ from the user-defined row is used.}
 2nd-degree, unrelated, respectively.}
 
 \item{showPlot}{If TRUE, display plot. If FALSE, just pass plot as a variable.}
+
+\item{which_plot}{if 1, returns just the plot of the posterior distributions,
+if 2 returns just the normalised posterior values. Anything else returns both
+plots.}
+
+\item{labels}{a length two character vector of labels for plots. Default is
+no labels.}
 }
 \value{
 a two-panel diagnostic ggplot object

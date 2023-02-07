@@ -14,13 +14,24 @@
 #' @param class_prior the prior probabilities for same/twin, 1st-degree,
 #' 2nd-degree, unrelated, respectively.
 #' @param showPlot If TRUE, display plot. If FALSE, just pass plot as a variable.
+#' @param which_plot if 1, returns just the plot of the posterior distributions,
+#' if 2 returns just the normalised posterior values. Anything else returns both
+#' plots.
+#' @param labels a length two character vector of labels for plots. Default is
+#' no labels.
 #'
 #' @return a two-panel diagnostic ggplot object
 #' @export
 #'
 #' @examples
 #' plotSLICE(relatedness_example, row = 1)
-plotSLICE <- function(in_tibble,row,title=NULL,class_prior=rep(1/4,4),showPlot=T){
+plotSLICE <- function(
+    in_tibble,
+    row,title=NULL,
+    class_prior=rep(1/4,4),
+    showPlot=TRUE,
+    which_plot = 0,
+    labels = NULL){
 
   # Test that the in_tibble is of the correct form
   if(nrow(in_tibble)==0){
@@ -54,6 +65,11 @@ plotSLICE <- function(in_tibble,row,title=NULL,class_prior=rep(1/4,4),showPlot=T
   # Check that showPlot is a logical variable
   if(!is.logical(showPlot)){
     stop('showPlot must be a logical (TRUE/FALSE) variable.')
+  }
+
+  # Check that labels is length two is present
+  if(!is.null(labels)){
+    stopifnot(length(labels) == 2)
   }
 
   # grab PMR info
@@ -116,6 +132,10 @@ plotSLICE <- function(in_tibble,row,title=NULL,class_prior=rep(1/4,4),showPlot=T
     ggplot2::geom_ribbon(ggplot2::aes(ymin=0,ymax=y,fill=model),col='black',alpha=0.5)+
     ggplot2::geom_segment(data=midpoint.tib,ggplot2::aes(x=p.sim,xend=p.sim,y=0,yend=y*0.99),linetype='dashed',col='black')
 
+  # return just distribution plot is asked for
+  if(which_plot == 1){
+    return(distribution.plot)
+  }
   # Calculate and plot posterior probability values
   posterior.tibble <- tibble::tibble(posterior=c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior/
                                        sum(c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior),
@@ -131,15 +151,30 @@ plotSLICE <- function(in_tibble,row,title=NULL,class_prior=rep(1/4,4),showPlot=T
     ggplot2::scale_x_discrete(guide=ggplot2::guide_axis(n.dodge=2))+
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank(),
           panel.background = ggplot2::element_blank(), axis.line = ggplot2::element_line(colour = "black"))
-
+  # Return just posterior plot is asked for
+  if(which_plot == 2){
+    return(posterior.plot)
+  }
   # Combine plots
-  gg1 <- gridExtra::arrangeGrob(distribution.plot+ggplot2::theme(legend.position='none'),
-                                posterior.plot+ggplot2::theme(legend.position='none'),
-                                nrow=1,
-                                top = grid::textGrob(title,gp=grid::gpar(fontsize=20,font=3)))
+  # Old code left in as archaeology. Why would you not in a paper for relationship between samples.
+  # gg1 <- gridExtra::arrangeGrob(distribution.plot+ggplot2::theme(legend.position='none'),
+  #                               posterior.plot+ggplot2::theme(legend.position='none'),
+  #                               nrow=1,
+  #                               top = grid::textGrob(title,gp=grid::gpar(fontsize=20,font=3)))
+  plot_grid <- ggpubr::ggarrange(
+    distribution.plot,
+    posterior.plot,
+    nrow = 1,
+    legend = "none",
+    labels = labels
+  )
+  plot_grid <- ggpubr::annotate_figure(
+    plot_grid,
+    top = ggpubr::text_grob(title,size = 20)
+  )
   # Plot if required
   if(showPlot){
-    plot(gg1)
+    return(plot_grid)
   }
-  return(gg1)
+  invisible(plot_grid)
 }
