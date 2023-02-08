@@ -29,7 +29,8 @@ Authors@R:
       given = "Divyaratan",
       family = "Popli",
       email = "divyaratan_popli@eva.mpg.de",
-      role = "aut"
+      role = "aut", 
+      comment = c(ORCID = "0000-0002-0305-6427")
     )
     )
 Description: The goal of BREAD is to provide an easy-to-use method 
