@@ -2,7 +2,7 @@ test_that("test_degree errors", {
   empty_tibble <- tibble::tribble(
     ~name, ~value
   )
-  false_example <- relatedness_example |> dplyr::rename(bob = pair)
+  false_example <- relatedness_example %>% dplyr::rename(bob = pair)
   expect_error(test_degree(empty_tibble))
   expect_error(test_degree(false_example))
   expect_error(test_degree(relatedness_example, row = 100))

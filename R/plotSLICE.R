@@ -140,7 +140,7 @@ plotSLICE <- function(
   posterior.tibble <- tibble::tibble(posterior=c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior/
                                        sum(c(stats::dbinom(x,N,(1-0.5^c(1:3))*M),weightedBinom(x,N,M))*class_prior),
                                      model=factor(kclasses,levels=kclasses))
-  posterior.tibble <- posterior.tibble |>
+  posterior.tibble <- posterior.tibble %>%
     dplyr::mutate(
       label = ifelse(
         posterior >= 0.01,

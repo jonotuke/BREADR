@@ -3,7 +3,7 @@ test_that("plotSLICE errors", {
     ~name, ~value
   )
   expect_error(plotSLICE(empty_tibble))
-  false_example1 <- relatedness_example |> dplyr::rename(bob = pair)
+  false_example1 <- relatedness_example %>% dplyr::rename(bob = pair)
   expect_error(plotSLICE(false_example1))
   expect_error(plotSLICE(relatedness_example))
   expect_error(plotSLICE(relatedness_example, row = 100))

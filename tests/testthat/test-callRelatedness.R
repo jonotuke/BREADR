@@ -1,5 +1,5 @@
 test_that("callRelatedness errors", {
-  false_example1 <- counts_example |> dplyr::rename(bob = pair)
+  false_example1 <- counts_example %>% dplyr::rename(bob = pair)
   expect_error(callRelatedness(false_example1))
   expect_error(callRelatedness(counts_example, class_prior = -1))
   expect_error(callRelatedness(counts_example, class_prior = 1.1))
