@@ -27,7 +27,7 @@ plotLOAF <- function(in_tibble,nsnps_cutoff=NULL,N=NULL,fntsize=7){
   }
   col_names_check <- c('row','pair','relationship','pmr','sd','mismatch','nsnps','ave_rel','Same_Twins','First_Degree','Second_Degree','Unrelated','BF')
   if((ncol(in_tibble)!=13)|(!all(names(in_tibble)==col_names_check))){
-    stop(paste0('Input tibble/data.frame must have 4 columns named: ',paste0(col_names_tibble,collapse=', '),'.'))
+    stop(paste0('Input tibble/data.frame must have 4 columns named: ',paste0(col_names_check,collapse=', '),'.'))
   }
 
   # Test that the overlapping snp cut off is sensible.
