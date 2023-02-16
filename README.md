@@ -23,8 +23,8 @@ You can install the development version of BREAD from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("jonotuke/BREAD")
+# install.packages("remotes")
+remotes::install_github("jonotuke/BREAD")
 ```
 
 ## Example
