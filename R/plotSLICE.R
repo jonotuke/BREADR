@@ -142,15 +142,9 @@ plotSLICE <- function(
                                      model=factor(kclasses,levels=kclasses))
   posterior.tibble <- posterior.tibble %>%
     dplyr::mutate(
-      label = ifelse(
-        posterior >= 0.01,
-        round(posterior, 2),
-        stringr::str_replace(
-          formatC(posterior, digits = 2, format = "e"),
-          "e", " %*% 10^"
-        )
+      label =label_formatter(posterior)
       )
-    )
+  # return(posterior.tibble)
   posterior.plot <- posterior.tibble %>%
     ggplot2::ggplot(ggplot2::aes(x=model,y=posterior))+
     ggplot2::theme_bw()+

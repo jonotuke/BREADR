@@ -45,3 +45,15 @@ ggcolorhue <- function(n) {
 convertP <- function(p,pbar){
   suppressWarnings(ifelse(p<pbar,log(1-p/pbar)/log(0.5)-1,Inf)) %>% return()
 }
+label_formatter <- function(x){
+  label <- dplyr::case_when(
+    x >= 0.01 ~ as.character(round(x, 4)),
+    x < 1e-6 ~ "{}<1 %*% 10^-6",
+    TRUE ~ stringr::str_replace(
+      formatC(x, digits = 2, format = "e"),
+      "e", " %*% 10^"
+    )
+  )
+  return(label)
+}
+
