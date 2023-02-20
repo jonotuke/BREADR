@@ -38,7 +38,8 @@ test_degree <- function(in_tibble,row,degree,printResults=TRUE){
   if(!is.numeric(degree)){
     stop('Degree must be numeric.')
   }
-  if(degree>10|degree<0|(degree%%1!=0)){
+  # if(degree>10|degree<0|(degree%%1!=0)){ # Removed constraint that integer
+  if(degree>10|degree<0){
     stop('Degree must be a value k such that 0<k<10.')
   }
 
