@@ -13,6 +13,7 @@
 #' @param filter_deam a TRUE/FALSE for if C->T and G->A sites should be ignored.
 #' @param outfile (OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
 #' if NULL, no back up saved. If no outfile, then a tibble is returned.
+#' @param chromosomes the chromosome to filter the data on.
 #'
 #' @return out_tibble: A tibble containing four columns:
 # - pair [char]: the pair of individuals that are compared.
@@ -34,7 +35,7 @@
 #' )
 processEigenstrat <- function(indfile, genofile, snpfile,
                               filter_length=NULL, pop_pattern=NULL, filter_deam=FALSE,
-                              outfile=NULL){
+                              outfile=NULL, chromosomes=NULL){
   # Check to see if eigenstrat files exist
   if(!file.exists(indfile)){
     stop(paste0('indfile ',indfile,' does not exist!'))
@@ -106,6 +107,21 @@ processEigenstrat <- function(indfile, genofile, snpfile,
     ) %>%
       dplyr::mutate(relative_pos=1:dplyr::n())
   }
+  # Filter for requested chromosomes
+  available_chr <- snps$chr %>%
+    unique()
+  if(!is.null(chromosomes)){
+    if(!any(chromosomes%in%available_chr)){
+      stop(paste0('Chromosome names do not match SNP file:\n',
+                  'Requested: ',paste0(chromosomes,collapse=', '),'\n',
+                  'Available: ',paste0(available_chr,collapse=', '),'\n'))
+    }else{
+      snps <- snps %>%
+        dplyr::filter(chr%in%chromosomes)
+    }
+  }
+  # Print information about chromosomes
+  cat(paste0('Analysing chromosomes:\n',paste0(unique(snps$chr),collapse=', '),'\n'))
   # Collect (potentially filtered) ind details
   if(is.null(pop_pattern)){
     ind <-  ind_raw %>%

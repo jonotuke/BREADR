@@ -67,7 +67,8 @@ and filtering out SNPs for which deamination is possible.</p>
 <span>  filter_length <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pop_pattern <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filter_deam <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  outfile <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  outfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chromosomes <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -101,6 +102,10 @@ and filtering out SNPs for which deamination is possible.</p>
 <dd><p>(OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
 if NULL, no back up saved. If no outfile, then a tibble is returned.</p></dd>
 
+
+<dt>chromosomes</dt>
+<dd><p>the chromosome to filter the data on.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -122,6 +127,8 @@ if NULL, no back up saved. If no outfile, then a tibble is returned.</p></dd>
 <span class="r-in"><span>filter_deam<span class="op">=</span><span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Reading in SNP data.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Analysing chromosomes:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Starting to read in genotype data.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                              |                                                                      |   0%  |                                                                              |==============                                                        |  20%  |                                                                              |============================                                          |  40%  |                                                                              |==========================================                            |  60%  |                                                                              |========================================================              |  80%  |                                                                              |======================================================================| 100%  Complete.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

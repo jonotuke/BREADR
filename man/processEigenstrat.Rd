@@ -11,7 +11,8 @@ processEigenstrat(
   filter_length = NULL,
   pop_pattern = NULL,
   filter_deam = FALSE,
-  outfile = NULL
+  outfile = NULL,
+  chromosomes = NULL
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ processEigenstrat(
 
 \item{outfile}{(OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
 if NULL, no back up saved. If no outfile, then a tibble is returned.}
+
+\item{chromosomes}{the chromosome to filter the data on.}
 }
 \value{
 out_tibble: A tibble containing four columns:
