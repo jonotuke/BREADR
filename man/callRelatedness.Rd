@@ -45,7 +45,7 @@ results_tibble: A tibble containing 13 columns:
 \item First_Degree: the posterior probability associated with a first-degree classification.
 \item Second_Degree: the posterior probability associated with a second-degree classification.
 \item Unrelated: the posterior probability associated with an unrelated classification.
-\item BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest.
+\item BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest. (No longer included)
 }
 }
 \description{

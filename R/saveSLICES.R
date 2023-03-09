@@ -23,8 +23,8 @@ saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm')
   if(nrow(in_tibble)==0){
     stop('The input tibble is empty')
   }
-  col_names_check <- c('row','pair','relationship','pmr','sd','mismatch','nsnps','ave_rel','Same_Twins','First_Degree','Second_Degree','Unrelated','BF')
-  if((ncol(in_tibble)!=13)|(!all(names(in_tibble)==col_names_check))){
+  col_names_check <- c('row','pair','relationship','pmr','sd','mismatch','nsnps','ave_rel','Same_Twins','First_Degree','Second_Degree','Unrelated')
+  if((ncol(in_tibble)!=12)|(!all(names(in_tibble)==col_names_check))){
     stop(paste0('Input tibble/data.frame must have 4 columns named: ',paste0(col_names_check,collapse=', '),'.'))
   }
 

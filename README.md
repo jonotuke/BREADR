@@ -106,7 +106,7 @@ unrelated individuals, the minimum number of overlapping SNPs for a pair
 ``` r
 relatedness_example <- callRelatedness(counts_example)
 relatedness_example
-#> # A tibble: 15 × 13
+#> # A tibble: 15 × 12
 #>      row pair    relat…¹   pmr      sd misma…² nsnps ave_rel Same_Tw…³ First_D…⁴
 #>    <int> <chr>   <fct>   <dbl>   <dbl>   <dbl> <dbl>   <dbl>     <dbl>     <dbl>
 #>  1     1 Ind1 -… Unrela… 0.204 0.0103      310  1518   0.218 6.71e- 26 2.00e-  4
@@ -124,7 +124,7 @@ relatedness_example
 #> 13    13 Ind4 -… Unrela… 0.210 0.00489    1451  6924   0.218 1.92e-127 5.79e- 22
 #> 14    14 Ind4 -… Unrela… 0.220 0.00419    2141  9745   0.218 2.95e-214 1.08e- 45
 #> 15    15 Ind5 -… Unrela… 0.220 0.00994     383  1739   0.218 3.64e- 39 6.79e-  9
-#> # … with 3 more variables: Second_Degree <dbl>, Unrelated <dbl>, BF <chr>, and
+#> # … with 2 more variables: Second_Degree <dbl>, Unrelated <dbl>, and
 #> #   abbreviated variable names ¹​relationship, ²​mismatch, ³​Same_Twins,
 #> #   ⁴​First_Degree
 ```

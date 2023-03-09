@@ -38,7 +38,7 @@
 #' - First_Degree: the posterior probability associated with a first-degree classification.
 #' - Second_Degree: the posterior probability associated with a second-degree classification.
 #' - Unrelated: the posterior probability associated with an unrelated classification.
-#' - BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest.
+#' - BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest. (No longer included)
 #' @export
 #'
 #' @examples
@@ -114,15 +114,15 @@ callRelatedness <- function(pmr_tibble,
                   First_Degree=(stats::dbinom(mismatch,nsnps,(1-0.5^2)*ave_rel,log=T)+log(class_prior[2])),
                   Second_Degree=(stats::dbinom(mismatch,nsnps,(1-0.5^3)*ave_rel,log=T)+log(class_prior[3])),
                   Unrelated=weightedBinom(mismatch,nsnps,ave_rel,log=T)+log(class_prior[4])) %>%
-    dplyr::mutate(BF=diff(sort(c(Same_Twins,First_Degree,Second_Degree,Unrelated))[c(3,4)])) %>%
+    # dplyr::mutate(BF=diff(sort(c(Same_Twins,First_Degree,Second_Degree,Unrelated))[c(3,4)])) %>%
     dplyr::mutate(normConst=matrixStats::logSumExp(c(Same_Twins,First_Degree,Second_Degree,Unrelated))%>%exp()) %>%
     dplyr::mutate(relationship=class_vec[which.max(c(Same_Twins,First_Degree,Second_Degree,Unrelated))]) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(BF=dplyr::case_when(BF <= log(10^0.5) ~ 'Weak Evidence',
-                               BF <= log(10^1) ~ 'Substantial Evidence',
-                               BF <= log(10^1.5) ~ 'Strong Evidence',
-                               BF <= log(10^2) ~ 'Very Strong Evidence',
-                               T ~ 'Decisive')) %>%
+    # dplyr::mutate(BF=dplyr::case_when(BF <= log(10^0.5) ~ 'Weak Evidence',
+    #                            BF <= log(10^1) ~ 'Substantial Evidence',
+    #                            BF <= log(10^1.5) ~ 'Strong Evidence',
+    #                            BF <= log(10^2) ~ 'Very Strong Evidence',
+    #                            T ~ 'Decisive')) %>%
     dplyr::mutate(Same_Twins=exp(Same_Twins)/normConst,
                   First_Degree=exp(First_Degree)/normConst,
                   Second_Degree=exp(Second_Degree)/normConst,

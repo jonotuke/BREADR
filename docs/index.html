@@ -127,7 +127,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">relatedness_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/callRelatedness.html">callRelatedness</a></span><span class="op">(</span><span class="va">counts_example</span><span class="op">)</span></span>
 <span><span class="va">relatedness_example</span></span>
-<span><span class="co">#&gt; # A tibble: 15 × 13</span></span>
+<span><span class="co">#&gt; # A tibble: 15 × 12</span></span>
 <span><span class="co">#&gt;      row pair    relat…¹   pmr      sd misma…² nsnps ave_rel Same_Tw…³ First_D…⁴</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;   &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1     1 Ind1 -… Unrela… 0.204 0.0103      310  1518   0.218 6.71e- 26 2.00e-  4</span></span>
@@ -145,7 +145,7 @@
 <span><span class="co">#&gt; 13    13 Ind4 -… Unrela… 0.210 0.00489    1451  6924   0.218 1.92e-127 5.79e- 22</span></span>
 <span><span class="co">#&gt; 14    14 Ind4 -… Unrela… 0.220 0.00419    2141  9745   0.218 2.95e-214 1.08e- 45</span></span>
 <span><span class="co">#&gt; 15    15 Ind5 -… Unrela… 0.220 0.00994     383  1739   0.218 3.64e- 39 6.79e-  9</span></span>
-<span><span class="co">#&gt; # … with 3 more variables: Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;, BF &lt;chr&gt;, and</span></span>
+<span><span class="co">#&gt; # … with 2 more variables: Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;, and</span></span>
 <span><span class="co">#&gt; #   abbreviated variable names ¹​relationship, ²​mismatch, ³​Same_Twins,</span></span>
 <span><span class="co">#&gt; #   ⁴​First_Degree</span></span></code></pre></div>
 <p>An overall picture of the relatedness for these individuals can be created, which displays the highest posterior probability degree of relatedness for each pair of individuals, indicated by the colour and shape of the points with 95% confidence intervals. The dashed horizontal lines indicated the expected values for each degree of relatedness.</p>

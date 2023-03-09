@@ -9,6 +9,6 @@ test_that("callRelatedness errors", {
   expect_error(callRelatedness(counts_example, filter_n = -1))
   tmp <- callRelatedness(counts_example)
   expect_equal(nrow(tmp), 15)
-  expect_equal(ncol(tmp), 13)
+  expect_equal(ncol(tmp), 12)
   expect_equal(tmp$pmr[1], 0.2042, tolerance = 0.001)
 })

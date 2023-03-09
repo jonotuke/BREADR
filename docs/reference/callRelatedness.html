@@ -132,7 +132,7 @@ removed from the entire analysis. If NULL, default is 1.</p></dd>
 <li><p>First_Degree: the posterior probability associated with a first-degree classification.</p></li>
 <li><p>Second_Degree: the posterior probability associated with a second-degree classification.</p></li>
 <li><p>Unrelated: the posterior probability associated with an unrelated classification.</p></li>
-<li><p>BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest.</p></li>
+<li><p>BF: A strength of confidence in the Bayes Factor associated with the highest posterior probability classification compared to the 2nd highest. (No longer included)</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -142,7 +142,7 @@ removed from the entire analysis. If NULL, default is 1.</p></dd>
 <span class="r-in"><span>  average_relatedness<span class="op">=</span><span class="cn">NULL</span>,</span></span>
 <span class="r-in"><span>  median_co<span class="op">=</span><span class="fl">5e2</span>,filter_n<span class="op">=</span><span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      row pair    relat…¹   pmr      sd misma…² nsnps ave_rel Same_Tw…³ First_D…⁴</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 Ind1 -… Unrela… 0.204 0.010<span style="text-decoration: underline;">3</span>      310  <span style="text-decoration: underline;">1</span>518   0.218 6.71<span style="color: #949494;">e</span><span style="color: #BB0000;">- 26</span> 2.00<span style="color: #949494;">e</span><span style="color: #BB0000;">-  4</span></span>
@@ -160,7 +160,7 @@ removed from the entire analysis. If NULL, default is 1.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>    13 Ind4 -… Unrela… 0.210 0.004<span style="text-decoration: underline;">89</span>    <span style="text-decoration: underline;">1</span>451  <span style="text-decoration: underline;">6</span>924   0.218 1.92<span style="color: #949494;">e</span><span style="color: #BB0000;">-127</span> 5.79<span style="color: #949494;">e</span><span style="color: #BB0000;">- 22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>    14 Ind4 -… Unrela… 0.220 0.004<span style="text-decoration: underline;">19</span>    <span style="text-decoration: underline;">2</span>141  <span style="text-decoration: underline;">9</span>745   0.218 2.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-214</span> 1.08<span style="color: #949494;">e</span><span style="color: #BB0000;">- 45</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>    15 Ind5 -… Unrela… 0.220 0.009<span style="text-decoration: underline;">94</span>     383  <span style="text-decoration: underline;">1</span>739   0.218 3.64<span style="color: #949494;">e</span><span style="color: #BB0000;">- 39</span> 6.79<span style="color: #949494;">e</span><span style="color: #BB0000;">-  9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 3 more variables: Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;, BF &lt;chr&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more variables: Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;, and</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​relationship, ²​mismatch, ³​Same_Twins,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​First_Degree</span></span>
 </code></pre></div>
