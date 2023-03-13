@@ -12,7 +12,7 @@ Authors@R:
       comment = c(ORCID = "0000-0002-1688-8951")
     ), 
     person(
-      given = "Adam (Ben)", 
+      given = "Adam B.", 
       family = "Rohrlach",
       email = "adam.rohrlach@adelaide.edu.au", 
       role = "aut",
