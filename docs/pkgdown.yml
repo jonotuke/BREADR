@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-03-22T22:22Z
+last_built: 2023-03-22T22:31Z
 urls:
   reference: https://jonotuke.github.io/BREAD/reference
   article: https://jonotuke.github.io/BREAD/articles

@@ -11,7 +11,7 @@
 #' split_line("rs3094315	1	0.0	752566	G	A")
 split_line <- function(x){
   x <- stringr::str_trim(x)
-  df <- stringr::str_split(x, " +|\t") |> purrr::pluck(1)
+  df <- stringr::str_split(x, " +|\t") %>% purrr::pluck(1)
   stopifnot(length(df) == 6)
   df <- tibble::tibble(
     snp = df[1],
@@ -38,6 +38,6 @@ split_line <- function(x){
 #' read_snp(broken_snpfile)
 read_snp <- function(filename){
   lines <- brio::read_lines(filename)
-  lines |> purrr::map_dfr(split_line)
+  lines %>% purrr::map_dfr(split_line)
 }
 
