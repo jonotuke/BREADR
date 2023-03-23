@@ -85,28 +85,49 @@ processEigenstrat <- function(indfile, genofile, snpfile,
 
   # Collect SNP details
   cat('Reading in SNP data.\n')
+  ## Read in SNP file
+  snps <- read_snp(snpfile)
+  ## Add relative position
+  snps <-
+    snps %>%
+    dplyr::mutate(
+      relative_pos=1:dplyr::n()
+    )
+  ## Mutate and filter for DEAM
   if(filter_deam){
-    snps <- readr::read_delim(
-      snpfile,
-      col_names=c('snp','chr','pos','site','anc','der'),
-      col_types=c('cdddcc'),
-      delim = "\t"
-    ) %>%
-      dplyr::mutate(relative_pos=1:dplyr::n()) %>%
-      dplyr::mutate(deam=dplyr::case_when(anc=='C'&der=='T' ~ T,
-                                   anc=='G'&der=='A' ~ T,
-                                   T ~ F)) %>%
+    snps <-
+      snps %>%
+      dplyr::mutate(
+        deam=dplyr::case_when(
+          anc=='C'&der=='T' ~ T,
+          anc=='G'&der=='A' ~ T,
+          T ~ F)
+      ) %>%
       dplyr::filter(!deam) %>%
       dplyr::select(-deam)
-  }else{
-    snps <- readr::read_delim(
-      snpfile,
-      col_names=c('snp','chr','pos','site','anc','der'),
-      col_types=c('cdddcc'),
-      delim = "\t"
-    ) %>%
-      dplyr::mutate(relative_pos=1:dplyr::n())
   }
+  # if(filter_deam){
+  #   snps <- readr::read_delim(
+  #     snpfile,
+  #     col_names=c('snp','chr','pos','site','anc','der'),
+  #     col_types=c('cdddcc'),
+  #     delim = "\t"
+  #   ) %>%
+  #     dplyr::mutate(relative_pos=1:dplyr::n()) %>%
+  #     dplyr::mutate(deam=dplyr::case_when(anc=='C'&der=='T' ~ T,
+  #                                  anc=='G'&der=='A' ~ T,
+  #                                  T ~ F)) %>%
+  #     dplyr::filter(!deam) %>%
+  #     dplyr::select(-deam)
+  # }else{
+  #   snps <- readr::read_delim(
+  #     snpfile,
+  #     col_names=c('snp','chr','pos','site','anc','der'),
+  #     col_types=c('cdddcc'),
+  #     delim = "\t"
+  #   ) %>%
+  #     dplyr::mutate(relative_pos=1:dplyr::n())
+  # }
   # Filter for requested chromosomes
   available_chr <- snps$chr %>%
     unique()
