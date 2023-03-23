@@ -37,7 +37,14 @@ split_line <- function(x){
 #' read_snp(std_snpfile)
 #' read_snp(broken_snpfile)
 read_snp <- function(filename){
-  lines <- brio::read_lines(filename)
-  lines %>% purrr::map_dfr(split_line)
+    df <- data.table::fread(
+      filename,
+      col.names=c("snp", "chr", "pos", "site", "anc", "der"),
+      colClasses=list(character=c(1,2,5,6))
+    )
+    df <- tibble::as_tibble(df)
+    return(df)
 }
-
+# pacman::p_load(tidyverse, targets)
+# read_snp("inst/extdata/broken.snp.txt")
+# read_snp("inst/extdata/example.snp.txt")
