@@ -59,12 +59,13 @@ processEigenstrat <- function(indfile, genofile, snpfile,
 
   # Check if all pop_names are in the possible populations.
   # Change to delim so works in different countries.
-  ind_raw <- readr::read_delim(
-    indfile,
-    col_names=c('ind','sex','pop'),
-    col_types=c('ccc'),
-    delim = "\t"
-  )
+  # ind_raw <- readr::read_delim(
+  #   indfile,
+  #   col_names=c('ind','sex','pop'),
+  #   col_types=c('ccc'),
+  #   delim = "\t"
+  # )
+  ind_raw <- read_ind(indfile)
   if(!all(pop_pattern%in%ind_raw$pop)){
     paste0('Following populations in pop_pattern do not exist in indfile: ',
            paste0(setdiff(pop_pattern,ind_raw$pop),collapse=', ')) %>%

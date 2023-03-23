@@ -107,26 +107,24 @@ unrelated individuals, the minimum number of overlapping SNPs for a pair
 relatedness_example <- callRelatedness(counts_example)
 relatedness_example
 #> # A tibble: 15 × 12
-#>      row pair    relat…¹   pmr      sd misma…² nsnps ave_rel Same_Tw…³ First_D…⁴
-#>    <int> <chr>   <fct>   <dbl>   <dbl>   <dbl> <dbl>   <dbl>     <dbl>     <dbl>
-#>  1     1 Ind1 -… Unrela… 0.204 0.0103      310  1518   0.218 6.71e- 26 2.00e-  4
-#>  2     2 Ind1 -… Unrela… 0.222 0.00428    2093  9435   0.218 1.22e-214 2.41e- 47
-#>  3     3 Ind1 -… Unrela… 0.224 0.00458    1854  8283   0.218 2.00e-194 3.44e- 44
-#>  4     4 Ind1 -… Unrela… 0.235 0.0116      314  1336   0.218 2.68e- 37 5.07e- 10
-#>  5     5 Ind1 -… Unrela… 0.215 0.00867     481  2242   0.218 9.82e- 46 2.62e-  9
-#>  6     6 Ind2 -… Unrela… 0.218 0.00432    1988  9119   0.218 5.06e-195 1.97e- 40
-#>  7     7 Ind2 -… Unrela… 0.213 0.00458    1699  7984   0.218 4.95e-156 3.85e- 29
-#>  8     8 Ind2 -… Unrela… 0.229 0.0122      270  1179   0.218 1.80e- 30 7.62e-  8
-#>  9     9 Ind2 -… Unrela… 0.215 0.00927     423  1965   0.218 1.10e- 40 1.81e-  8
-#> 10    10 Ind3 -… Same_T… 0.108 0.00214    2253 20952   0.218 1   e+  0 1.39e-116
-#> 11    11 Ind3 -… Unrela… 0.213 0.00458    1703  7994   0.218 6.83e-157 1.84e- 29
-#> 12    12 Ind3 -… Unrela… 0.218 0.00394    2398 10994   0.218 2.05e-235 8.68e- 49
-#> 13    13 Ind4 -… Unrela… 0.210 0.00489    1451  6924   0.218 1.92e-127 5.79e- 22
-#> 14    14 Ind4 -… Unrela… 0.220 0.00419    2141  9745   0.218 2.95e-214 1.08e- 45
-#> 15    15 Ind5 -… Unrela… 0.220 0.00994     383  1739   0.218 3.64e- 39 6.79e-  9
-#> # … with 2 more variables: Second_Degree <dbl>, Unrelated <dbl>, and
-#> #   abbreviated variable names ¹​relationship, ²​mismatch, ³​Same_Twins,
-#> #   ⁴​First_Degree
+#>      row pair       relationship   pmr      sd mismatch nsnps ave_rel Same_Twins
+#>    <int> <chr>      <fct>        <dbl>   <dbl>    <dbl> <dbl>   <dbl>      <dbl>
+#>  1     1 Ind1 - In… Unrelated    0.204 0.0103       310  1518   0.218  6.71e- 26
+#>  2     2 Ind1 - In… Unrelated    0.222 0.00428     2093  9435   0.218  1.22e-214
+#>  3     3 Ind1 - In… Unrelated    0.224 0.00458     1854  8283   0.218  2.00e-194
+#>  4     4 Ind1 - In… Unrelated    0.235 0.0116       314  1336   0.218  2.68e- 37
+#>  5     5 Ind1 - In… Unrelated    0.215 0.00867      481  2242   0.218  9.82e- 46
+#>  6     6 Ind2 - In… Unrelated    0.218 0.00432     1988  9119   0.218  5.06e-195
+#>  7     7 Ind2 - In… Unrelated    0.213 0.00458     1699  7984   0.218  4.95e-156
+#>  8     8 Ind2 - In… Unrelated    0.229 0.0122       270  1179   0.218  1.80e- 30
+#>  9     9 Ind2 - In… Unrelated    0.215 0.00927      423  1965   0.218  1.10e- 40
+#> 10    10 Ind3 - In… Same_Twins   0.108 0.00214     2253 20952   0.218  1   e+  0
+#> 11    11 Ind3 - In… Unrelated    0.213 0.00458     1703  7994   0.218  6.83e-157
+#> 12    12 Ind3 - In… Unrelated    0.218 0.00394     2398 10994   0.218  2.05e-235
+#> 13    13 Ind4 - In… Unrelated    0.210 0.00489     1451  6924   0.218  1.92e-127
+#> 14    14 Ind4 - In… Unrelated    0.220 0.00419     2141  9745   0.218  2.95e-214
+#> 15    15 Ind5 - In… Unrelated    0.220 0.00994      383  1739   0.218  3.64e- 39
+#> # ℹ 3 more variables: First_Degree <dbl>, Second_Degree <dbl>, Unrelated <dbl>
 ```
 
 An overall picture of the relatedness for these individuals can be
