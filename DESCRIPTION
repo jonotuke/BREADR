@@ -1,6 +1,5 @@
-Package: BREAD
-Title: Estimates degrees of relatedness (up to the second degree) 
-  for extrememly low-coverage data
+Package: BREADR
+Title: Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data
 Version: 1.0.0
 Authors@R: 
     c(
@@ -35,7 +34,7 @@ Authors@R:
     )
 Description: The goal of BREAD is to provide an easy-to-use method 
   for estimating degrees of relatedness (up to the second degree) 
-  for extrememly low-coverage data. BREAD also allows users to 
+  for extreme low-coverage data. BREAD also allows users to 
   quantify and visualise the level of confidence in the estimated 
   degrees of relatedness. 
 License: MIT + file LICENSE
@@ -66,4 +65,3 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
-VignetteBuilder: knitr
