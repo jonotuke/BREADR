@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' ind_snpfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
+#' ind_snpfile <- system.file("extdata", "example.ind.txt", package = "BREADR")
 #' read_ind(ind_snpfile)
 read_ind <- function(filename){
     df <- data.table::fread(

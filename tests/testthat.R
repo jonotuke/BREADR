@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(BREAD)
+library(BREADR)
 
-test_check("BREAD")
+test_check("BREADR")

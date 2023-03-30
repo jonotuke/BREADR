@@ -16,6 +16,6 @@ tibble with column headings: ind (CHR), sex (CHR), pop (CHR)
 read_ind
 }
 \examples{
-ind_snpfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
+ind_snpfile <- system.file("extdata", "example.ind.txt", package = "BREADR")
 read_ind(ind_snpfile)
 }

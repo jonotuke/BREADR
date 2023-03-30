@@ -32,18 +32,18 @@ Authors@R:
       comment = c(ORCID = "0000-0002-0305-6427")
     )
     )
-Description: The goal of BREAD is to provide an easy-to-use method 
+Description: The goal of BREADR is to provide an easy-to-use method 
   for estimating degrees of relatedness (up to the second degree) 
-  for extreme low-coverage data. BREAD also allows users to 
+  for extreme low-coverage data. BREADR also allows users to 
   quantify and visualise the level of confidence in the estimated 
   degrees of relatedness. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/jonotuke/BREAD,
-    https://jonotuke.github.io/BREAD/
-BugReports: https://github.com/jonotuke/BREAD/issues
+URL: https://github.com/jonotuke/BREADR,
+    https://jonotuke.github.io/BREADR/
+BugReports: https://github.com/jonotuke/BREADR/issues
 Suggests: 
     knitr,
     rmarkdown,

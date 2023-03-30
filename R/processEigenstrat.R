@@ -24,9 +24,9 @@
 #'
 #' @examples
 #' # Use internal files to the package as an example
-#' indfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
-#' genofile <- system.file("extdata", "example.geno.txt", package = "BREAD")
-#' snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")
+#' indfile <- system.file("extdata", "example.ind.txt", package = "BREADR")
+#' genofile <- system.file("extdata", "example.geno.txt", package = "BREADR")
+#' snpfile <- system.file("extdata", "example.snp.txt", package = "BREADR")
 #' processEigenstrat(
 #' indfile, genofile, snpfile,
 #' filter_length=1e5,

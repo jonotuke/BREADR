@@ -4,7 +4,7 @@ genofile <- "data-raw/example.geno.txt"
 snpfile <- "data-raw/example.snp.txt"
 
 # load package ----
-pacman::p_load(tidyverse, targets, BREAD)
+pacman::p_load(tidyverse, targets, BREADR)
 
 # use function processEigenstrat to get counts_example ----
 counts_example <- processEigenstrat(

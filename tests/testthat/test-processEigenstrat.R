@@ -1,8 +1,8 @@
 test_that("processEigenstart errors", {
   # load files
-  indfile <- system.file("extdata", "example.ind.txt", package = "BREAD")
-  genofile <- system.file("extdata", "example.geno.txt", package = "BREAD")
-  snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")
+  indfile <- system.file("extdata", "example.ind.txt", package = "BREADR")
+  genofile <- system.file("extdata", "example.geno.txt", package = "BREADR")
+  snpfile <- system.file("extdata", "example.snp.txt", package = "BREADR")
   # check input
   expect_error(
     processEigenstrat(indfile = "no-file.txt")

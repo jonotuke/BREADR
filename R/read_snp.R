@@ -32,8 +32,8 @@ split_line <- function(x){
 #' @export
 #'
 #' @examples
-#' std_snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")
-#' broken_snpfile <- system.file("extdata", "broken.snp.txt", package = "BREAD")
+#' std_snpfile <- system.file("extdata", "example.snp.txt", package = "BREADR")
+#' broken_snpfile <- system.file("extdata", "broken.snp.txt", package = "BREADR")
 #' read_snp(std_snpfile)
 #' read_snp(broken_snpfile)
 read_snp <- function(filename){

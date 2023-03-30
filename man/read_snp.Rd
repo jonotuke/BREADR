@@ -17,8 +17,8 @@ pos (DBL), site (DBL), anc (CHR), and der (CHR).
 read_snp
 }
 \examples{
-std_snpfile <- system.file("extdata", "example.snp.txt", package = "BREAD")
-broken_snpfile <- system.file("extdata", "broken.snp.txt", package = "BREAD")
+std_snpfile <- system.file("extdata", "example.snp.txt", package = "BREADR")
+broken_snpfile <- system.file("extdata", "broken.snp.txt", package = "BREADR")
 read_snp(std_snpfile)
 read_snp(broken_snpfile)
 }
