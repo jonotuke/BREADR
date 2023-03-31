@@ -33,5 +33,7 @@ Options include the width and height of the output files, and the units in
 which these dimensions are measured.
 }
 \examples{
+\dontrun{
 saveSLICES(relatedness_example[1:3, ], outFolder = tempdir())
+}
 }

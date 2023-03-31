@@ -32,9 +32,9 @@ Authors@R:
       comment = c(ORCID = "0000-0002-0305-6427")
     )
     )
-Description: The goal of BREADR is to provide an easy-to-use method 
+Description: The goal of the package is to provide an easy-to-use method 
   for estimating degrees of relatedness (up to the second degree) 
-  for extreme low-coverage data. BREADR also allows users to 
+  for extreme low-coverage data. The package also allows users to 
   quantify and visualise the level of confidence in the estimated 
   degrees of relatedness. 
 License: MIT + file LICENSE

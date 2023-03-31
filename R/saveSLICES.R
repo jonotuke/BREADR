@@ -15,7 +15,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' saveSLICES(relatedness_example[1:3, ], outFolder = tempdir())
+#' }
 saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm'){
 
 
