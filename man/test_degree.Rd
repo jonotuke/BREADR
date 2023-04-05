@@ -4,7 +4,7 @@
 \alias{test_degree}
 \title{test_degree}
 \usage{
-test_degree(in_tibble, row, degree, printResults = TRUE)
+test_degree(in_tibble, row, degree, verbose = TRUE)
 }
 \arguments{
 \item{in_tibble}{a tibble that is the output of the callRelatedness() function.}
@@ -13,7 +13,7 @@ test_degree(in_tibble, row, degree, printResults = TRUE)
 
 \item{degree}{the degree of relatedness to be tested.}
 
-\item{printResults}{a logical (boolean) for whether all test output should be printed to screen.}
+\item{verbose}{a logical (boolean) for whether all test output should be printed to screen.}
 }
 \value{
 the associated p-value for the test

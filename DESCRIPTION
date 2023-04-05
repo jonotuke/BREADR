@@ -36,7 +36,8 @@ Description: The goal of the package is to provide an easy-to-use method
   for estimating degrees of relatedness (up to the second degree) 
   for extreme low-coverage data. The package also allows users to 
   quantify and visualise the level of confidence in the estimated 
-  degrees of relatedness. 
+  degrees of relatedness. A paper describing the method is available 
+  at <https://tinyurl.com/29t6gbbx>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

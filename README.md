@@ -180,11 +180,11 @@ plotSLICE(relatedness_example, row = "Ind1 - Ind2")
 We can test whether the observed PMR between Ind1 and Ind2 is consistent
 with a 3rd-degree genetic relationship, or not, but any degree of
 relatedness from 0 to 10 can be investigated. This function returns the
-p-value from the associated binomial test, and by setting printResults
-to TRUE, all diagnostic output from the test can be displayed
+p-value from the associated binomial test, and by setting verbose to
+TRUE, all diagnostic output from the test can be displayed
 
 ``` r
-test_degree(relatedness_example, 1, 3, printResults = TRUE)
+test_degree(relatedness_example, 1, 3, verbose = TRUE)
 #> Testing H0       : "Ind1 - Ind2" are 3rd-degree relatives.
 #> Expected PMR     : 0.2044
 #> Observed PMR     : 0.2042

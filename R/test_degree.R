@@ -5,14 +5,14 @@
 #' @param in_tibble a tibble that is the output of the callRelatedness() function.
 #' @param row either the row number or pair name for which the posterior distribution is to be plotted.
 #' @param degree the degree of relatedness to be tested.
-#' @param printResults a logical (boolean) for whether all test output should be printed to screen.
+#' @param verbose a logical (boolean) for whether all test output should be printed to screen.
 #'
 #' @return the associated p-value for the test
 #' @export
 #'
 #' @examples
 #' test_degree(relatedness_example, 1, 1)
-test_degree <- function(in_tibble,row,degree,printResults=TRUE){
+test_degree <- function(in_tibble,row,degree,verbose=TRUE){
   # Test that the in_tibble is of the correct form
   if(nrow(in_tibble)==0){
     stop('The input tibble is empty')
@@ -65,7 +65,7 @@ test_degree <- function(in_tibble,row,degree,printResults=TRUE){
                              degree==2 ~ "2nd",
                              degree==3 ~ "3rd",
                              T ~ paste0(degree,"th"))
-  if(printResults){
+  if(verbose){
     cat(sprintf('Testing H0       : "%s" are %s-degree relatives.\n',pair,degree_string))
     cat(sprintf('Expected PMR     : %.4f\n',pk))
     cat(sprintf('Observed PMR     : %.4f\n',x/N))
