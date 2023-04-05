@@ -4,7 +4,7 @@
 \alias{plotLOAF}
 \title{plotLOAF}
 \usage{
-plotLOAF(in_tibble, nsnps_cutoff = NULL, N = NULL, fntsize = 7)
+plotLOAF(in_tibble, nsnps_cutoff = NULL, N = NULL, fntsize = 7, verbose = TRUE)
 }
 \arguments{
 \item{in_tibble}{a tibble that is the output of the callRelatedness() function.}
@@ -16,6 +16,9 @@ pairs are removed from the plot. If NULL, default is 500.}
 Avoids plotting all pairs (many of which are unrelated).}
 
 \item{fntsize}{the fontsize for the x-axis names.}
+
+\item{verbose}{if TRUE, then information about the plotting process is sent
+to the console}
 }
 \value{
 a ggplot object

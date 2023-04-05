@@ -12,6 +12,8 @@
 #' @param N the number of (sorted by increasing PMR) pairs to plot.
 #' Avoids plotting all pairs (many of which are unrelated).
 #' @param fntsize the fontsize for the x-axis names.
+#' @param verbose if TRUE, then information about the plotting process is sent
+#' to the console
 #'
 #' @return a ggplot object
 #' @export
@@ -19,7 +21,7 @@
 #' @examples
 #' relatedness_example
 #' plotLOAF(relatedness_example)
-plotLOAF <- function(in_tibble,nsnps_cutoff=NULL,N=NULL,fntsize=7){
+plotLOAF <- function(in_tibble,nsnps_cutoff=NULL,N=NULL,fntsize=7, verbose = TRUE){
 
   # Test that the in_tibble is of the correct form
   if(nrow(in_tibble)==0){
@@ -33,7 +35,9 @@ plotLOAF <- function(in_tibble,nsnps_cutoff=NULL,N=NULL,fntsize=7){
   # Test that the overlapping snp cut off is sensible.
   if(is.null(nsnps_cutoff)){
     nsnps_cutoff <- 5e2
-    cat(sprintf('No minimum number of overlapping SNPs given.\nUsing default minimum of 500.\n'))
+    if(verbose){
+      cat(sprintf('No minimum number of overlapping SNPs given.\nUsing default minimum of 500.\n'))
+    }
   }
   if((nsnps_cutoff<=0)){
     stop('The cut off for the number of overlapping snps must be greater than 0.')
@@ -44,10 +48,14 @@ plotLOAF <- function(in_tibble,nsnps_cutoff=NULL,N=NULL,fntsize=7){
   # test that the number of pairs to plot is sensible.
   if(is.null(N)){
     N <- min(nrow(in_tibble),50)
-    cat(sprintf('No upper limit on number of pairs to plot given.\nPlotting first %i pairs.\n',N))
+    if(verbose){
+      cat(sprintf('No upper limit on number of pairs to plot given.\nPlotting first %i pairs.\n',N))
+    }
   }else if(N>sum(in_tibble$nsnps>nsnps_cutoff)){
     N <- sum(in_tibble$nsnps>nsnps_cutoff)
-    cat(sprintf('Number of pairs to plot was greater than the number of available pairs.\nPlotting first %i pairs.\n',N))
+    if(verbose){
+      cat(sprintf('Number of pairs to plot was greater than the number of available pairs.\nPlotting first %i pairs.\n',N))
+    }
   }
 
   # Define class breaks
