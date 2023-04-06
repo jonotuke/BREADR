@@ -12,7 +12,8 @@ processEigenstrat(
   pop_pattern = NULL,
   filter_deam = FALSE,
   outfile = NULL,
-  chromosomes = NULL
+  chromosomes = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ processEigenstrat(
 if NULL, no back up saved. If no outfile, then a tibble is returned.}
 
 \item{chromosomes}{the chromosome to filter the data on.}
+
+\item{verbose}{controls printing of messages to console}
 }
 \value{
 out_tibble: A tibble containing four columns:

@@ -71,3 +71,11 @@ the console.
 e.g.: R/plotLOAF.R
 
 * Changed all output to be wrapped in verbose and added verbose as parameter. 
+
+## Resubmission 2023-04-07
+
+> Please also add the verbose argument to all functions with cat() as you correctly did for R/plotLOAF.R
+
+> -> e.g.: R/processEigenstrat.R, R/saveSLICES.R...
+
+* All cat functions wrapped in verbose if condition. 

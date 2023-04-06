@@ -14,6 +14,7 @@
 #' @param outfile (OPTIONAL) a path and filename to which we can save the output of the function as a TSV,
 #' if NULL, no back up saved. If no outfile, then a tibble is returned.
 #' @param chromosomes the chromosome to filter the data on.
+#' @param verbose controls printing of messages to console
 #'
 #' @return out_tibble: A tibble containing four columns:
 # - pair [char]: the pair of individuals that are compared.
@@ -35,7 +36,7 @@
 #' )
 processEigenstrat <- function(indfile, genofile, snpfile,
                               filter_length=NULL, pop_pattern=NULL, filter_deam=FALSE,
-                              outfile=NULL, chromosomes=NULL){
+                              outfile=NULL, chromosomes=NULL, verbose = TRUE){
   # Check to see if eigenstrat files exist
   if(!file.exists(indfile)){
     stop(paste0('indfile ',indfile,' does not exist!'))
@@ -51,7 +52,9 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   # let the user know of the default and/or problem.
   if(is.null(filter_length)){
     filter_length <- 1e5
-    cat(sprintf('No site distance filter.\nUsing default minimum of 1e5.\n'))
+    if(verbose){
+      cat(sprintf('No site distance filter.\nUsing default minimum of 1e5.\n'))
+    }
   }
   if(!is.numeric(filter_length)|(filter_length<=0)){
     stop('filter_length must be a positive number.')
@@ -85,7 +88,9 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   }
 
   # Collect SNP details
-  cat('Reading in SNP data.\n')
+  if(verbose){
+    cat('Reading in SNP data.\n')
+  }
   ## Read in SNP file
   snps <- read_snp(snpfile)
   ## Add relative position
@@ -143,7 +148,9 @@ processEigenstrat <- function(indfile, genofile, snpfile,
     }
   }
   # Print information about chromosomes
-  cat(paste0('Analysing chromosomes:\n',paste0(unique(snps$chr),collapse=', '),'\n'))
+  if(verbose){
+    cat(paste0('Analysing chromosomes:\n',paste0(unique(snps$chr),collapse=', '),'\n'))
+  }
   # Collect (potentially filtered) ind details
   if(is.null(pop_pattern)){
     ind <-  ind_raw %>%
@@ -165,16 +172,20 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   }
   geno_list <- vector(mode='list',length=n_ind)
 
-  cat('Starting to read in genotype data.\n')
+  if(verbose){
+    cat('Starting to read in genotype data.\n')
+  }
   pb1 = utils::txtProgressBar(min=1,max=length(geno_list),initial=1,style=3)
   for(i in 1:n_ind){
     geno_list[[i]] <- (system(paste0('cut -c ',ind$row_number[i],' ',genofile),intern=T) %>% dplyr::na_if("9"))[snps$relative_pos]
     utils::setTxtProgressBar(pb1,i)
 
   }
-  cat('  Complete.\n\n')
+  if(verbose){
+    cat('  Complete.\n\n')
 
-  cat('Starting to compare genotypes and calculate PMR.\n')
+    cat('Starting to compare genotypes and calculate PMR.\n')
+  }
   counter <- 1
   out_tibble <- tibble::tibble(pair=rep('x',choose(n_ind,2)),nsnps=0,mismatch=0,pmr=0)
   pb2 = utils::txtProgressBar(min=1,max=choose(n_ind,2),initial=1,style=3)
@@ -213,10 +224,14 @@ processEigenstrat <- function(indfile, genofile, snpfile,
   }
 
   if(!is.null(outfile)){
-    cat (sprintf('\n\nSaving processed data to %s.\n',outfile))
+    if(verbose){
+      cat(sprintf('\n\nSaving processed data to %s.\n',outfile))
+    }
     readr::write_delim(out_tibble,file=outfile,delim='\t')
   }
-  cat('\nComplete.\n\n')
+  if(verbose){
+    cat('\nComplete.\n\n')
+  }
 
   out_tibble %>% return()
 }

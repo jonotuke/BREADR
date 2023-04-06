@@ -9,7 +9,8 @@ saveSLICES(
   outFolder = NULL,
   width = 297,
   height = 210,
-  units = "mm"
+  units = "mm",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ saveSLICES(
 \item{height}{the height of the output PDFs.}
 
 \item{units}{the units for the height and width of the output PDFs.}
+
+\item{verbose}{Controls the printing of progress to console.}
 }
 \value{
 nothing

@@ -10,6 +10,7 @@
 #' @param width the width of the output PDFs.
 #' @param height the height of the output PDFs.
 #' @param units the units for the height and width of the output PDFs.
+#' @param verbose Controls the printing of progress to console.
 #'
 #' @return nothing
 #' @export
@@ -18,7 +19,7 @@
 #' \donttest{
 #' saveSLICES(relatedness_example[1:3, ], outFolder = tempdir())
 #' }
-saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm'){
+saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm', verbose = TRUE){
 
 
   # Test that the in_tibble is of the correct form
@@ -53,7 +54,9 @@ saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm')
   }
 
   # Start plotting!
-  cat('Starting pairwise plot creation.\n')
+  if(verbose){
+    cat('Starting pairwise plot creation.\n')
+  }
 
 
   pb = utils::txtProgressBar(min=1,max=nrow(in_tibble),initial=1,style=3)
@@ -64,6 +67,8 @@ saveSLICES <- function(in_tibble,outFolder=NULL,width=297,height=210,units='mm')
                     width=width,height=height,units=units)
     utils::setTxtProgressBar(pb,i)
   }
-  cat(paste0('\nCompleted\nAll plots in: ',outFolder,'\n'))
+  if(verbose){
+    cat(paste0('\nCompleted\nAll plots in: ',outFolder,'\n'))
+  }
   return(TRUE)
 }
