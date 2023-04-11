@@ -25,9 +25,15 @@ The method requires Eigenstrat files (an ind, geno and snp file) to begin, allow
 
 ## Installation
 
+To install, you can use the usual
+
+```{r, eval=FALSE}
+install.packages("BREADR")
+```
+
 You can install the development version of BREADR from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("jonotuke/BREADR")
 ```
