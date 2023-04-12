@@ -79,3 +79,7 @@ e.g.: R/plotLOAF.R
 > -> e.g.: R/processEigenstrat.R, R/saveSLICES.R...
 
 * All cat functions wrapped in verbose if condition. 
+
+## Patch 2023-04-12
+
+* Found an error in read functions that causing error in PMR. Fixed. 
