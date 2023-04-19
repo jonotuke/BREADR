@@ -37,7 +37,7 @@ Description: The goal of the package is to provide an easy-to-use method
   for extreme low-coverage data. The package also allows users to 
   quantify and visualise the level of confidence in the estimated 
   degrees of relatedness. A paper describing the method is available 
-  at Rohrlach, A. B. et al (2023) <https://tinyurl.com/29t6gbbx>. 
+  at Rohrlach, A. B. et al (2023) <https://www.biorxiv.org/content/10.1101/2023.04.17.537144v1>. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

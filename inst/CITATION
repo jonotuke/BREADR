@@ -1,0 +1,14 @@
+citHeader("To cite BREADR in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "BREADR: An R Package for the Bayesian Estimation of Genetic Relatedness from Low-coverage Genotype Data",
+  author   = "Adam B Rohrlach and Jonathan Tuke and Divyaratan Popli and Wolfgang Haak",
+  journal  = "bioRxiv",
+  year     = 2023,
+  url      = "https://www.biorxiv.org/content/early/2023/04/18/2023.04.17.537144",
+  textVersion = paste(
+    "https://www.biorxiv.org/content/early/2023/04/18/2023.04.17.537144.full.pdf"
+  )
+)
+
