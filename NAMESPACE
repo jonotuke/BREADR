@@ -2,6 +2,7 @@
 
 export("%>%")
 export(callRelatedness)
+export(get_column_new)
 export(plotLOAF)
 export(plotSLICE)
 export(processEigenstrat)
