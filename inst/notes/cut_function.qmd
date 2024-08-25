@@ -1,0 +1,174 @@
+---
+title: "Fixing the cut function"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fixing the cut function}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(BREADR)
+pacman::p_load(conflicted, tidyverse, targets, data.table)
+```
+
+# Eigenstrat format
+The format of eigenstrat is as follows (<https://reich.hms.harvard.edu/software/InputFileFormats>)
+
+## genotype file
+This file consists of one row for each SNP, and a column for each individual
+
+
+The genotype file contains 1 line per SNP. Each line contains 1 character per individual:
+
+- 0 means zero copies of reference allele.
+- 1 means one copy of reference allele.
+- 2 means two copies of reference allele.
+- 9 means missing data
+
+## simulating genofile
+We can simulate this with
+
+```{r}
+sim_geno(n_ind = 5, n_snp = 10, here::here("inst", "notes", "geno.txt"))
+```
+
+# Problem with cut file
+So the problem we have is that the `processEigenstrat()` has the following line
+
+```{r}
+#| eval: false
+geno_list[[i]] <- (system(paste0('cut -c ',ind$row_number[i],' ',genofile),intern=T) %>% 
+  dplyr::na_if("9"))[snps$relative_pos]
+```
+
+So what does the cut do, it grabs the $i$th column
+
+```{bash}
+head geno.txt
+echo "Cut first col"
+cut -c 1 geno.txt
+echo "Cut second col"
+cut -c 2 geno.txt
+```
+
+So we need a replacement for `cut` as this is not on windows machines. 
+
+# Possible solution
+We can get the $i$th digit of an integer with the following
+
+```{r}
+x <- 12345
+for(i in 1:5){
+  print(x %/% 10^(trunc(log10(x)) - i + 1) %% 10)
+}
+```
+
+This is from
+
+<https://codegolf.stackexchange.com/questions/25534/output-the-nth-digits-of-an-integer>
+
+The main problem with this, is when you read in a lot of individuals, the the digits are too large to represent a single integer. 
+
+Instead, we convert the digits to a character and use substring
+
+```{r}
+x <- "12345"
+for(i in 1:5){
+  print(str_sub(x, i, i))
+}
+```
+
+# Compare
+## Code with cut
+
+```{r}
+n_snp <- 500
+n_ind <- 10
+file <- here::here("inst", "notes", "small-geno.txt")
+sim_geno(n_ind = n_ind, n_snp = n_snp, filename = file)
+```
+
+
+```{r}
+library(tictoc)
+tic()
+geno_list_1 <- vector(mode='list',length=n_ind)
+for(i in 1:n_ind){
+  geno_list_1[[i]] <- (system(paste0('cut -c ',i,' ',file),intern=T)) 
+}
+toc()
+```
+
+
+# Code to read in without cut
+
+```{r}
+tic()
+geno_list_2 <- list(length=n_ind)
+dt <- fread(file, col.names = "snp", colClasses = "character")
+dt
+for(i in 1:n_ind){
+  dt[, digit := str_sub(snp, i, i),]
+  geno_list_2[[i]] <- dt[[2]]
+}
+toc()
+```
+
+
+```{r}
+identical(
+  geno_list_1[[1]],
+  geno_list_2[[1]]
+  )
+```
+
+
+## Code with cut
+
+```{r}
+n_snp <- 10000
+n_ind <- 200
+file <- here::here("inst", "notes", "large-geno.txt")
+sim_geno(n_ind = n_ind, n_snp = n_snp, filename = file)
+```
+
+
+```{r}
+library(tictoc)
+tic()
+geno_list_1 <- vector(mode='list',length=n_ind)
+for(i in 1:n_ind){
+  geno_list_1[[i]] <- (system(paste0('cut -c ',i,' ',file),intern=T)) 
+}
+toc()
+```
+
+
+# Code to read in without cut
+
+```{r}
+tic()
+geno_list_2 <- list(length=n_ind)
+dt <- fread(file, col.names = "snp", colClasses = "character")
+for(i in 1:n_ind){
+  dt[, digit := str_sub(snp, i, i),]
+  geno_list_2[[i]] <- dt[[2]]
+}
+toc()
+```
+
+
+```{r}
+identical(
+  geno_list_1[[1]],
+  geno_list_2[[1]]
+  )
+```

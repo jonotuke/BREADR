@@ -10,3 +10,4 @@
 ^doc$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^inst/notes

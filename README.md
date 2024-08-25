@@ -199,5 +199,3 @@ test_degree(relatedness_example, 1, 3, verbose = TRUE)
 #> Decision         : Retain H0
 #> [1] 0.9823165
 ```
-
-This is a test

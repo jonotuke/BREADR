@@ -1,63 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/404.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/callRelatedness.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/counts_example.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/get_column_new.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/plotLOAF.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/plotSLICE.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/processEigenstrat.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/read_ind.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/read_snp.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/relatedness_example.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/saveSLICES.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/split_line.html</loc>
-  </url>
-  <url>
-    <loc>https://jonotuke.github.io/BREADR/reference/test_degree.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jonotuke.github.io/BREADR/404.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/LICENSE-text.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/LICENSE.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/authors.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/index.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/news/index.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/callRelatedness.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/counts_example.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/get_column_new.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/index.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/pipe.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/plotLOAF.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/plotSLICE.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/processEigenstrat.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/read_ind.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/read_snp.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/relatedness_example.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/saveSLICES.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/sim_geno.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/split_line.html</loc></url>
+<url><loc>https://jonotuke.github.io/BREADR/reference/test_degree.html</loc></url>
 </urlset>
+

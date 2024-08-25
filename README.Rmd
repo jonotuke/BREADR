@@ -105,5 +105,3 @@ We can test whether the observed PMR between Ind1 and Ind2 is consistent with a 
 test_degree(relatedness_example, 1, 3, verbose = TRUE)
 ```
 
-
-This is a test
