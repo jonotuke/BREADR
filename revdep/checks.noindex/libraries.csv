@@ -1,7 +1,0 @@
-package,old,new,delta
-BREADR,1.0.1,1.0.2,*
-cpp11,NA,0.5.0,*
-data.table,NA,1.16.0,*
-ggrepel,NA,0.9.6,*
-matrixStats,NA,1.4.1,*
-microbenchmark,NA,1.5.0,*

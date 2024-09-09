@@ -87,3 +87,7 @@ e.g.: R/plotLOAF.R
 ## Patch 2024-09-09
 
 * Fixed processEigenstrat so that works on windows machines. 
+
+## Resubmission 2024-09-09
+
+Mistakenly left repdev checking in folder - now removed. 
