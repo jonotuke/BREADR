@@ -2,7 +2,7 @@
 % Please edit documentation in R/processEigenstrat.R
 \name{processEigenstrat}
 \alias{processEigenstrat}
-\title{process Eigenstrat data}
+\title{process Eigenstrat data - alternative version}
 \usage{
 processEigenstrat(
   indfile,

@@ -1,4 +1,7 @@
-#' process Eigenstrat data
+utils::globalVariables(
+  c("digit", "snp")
+)
+#' process Eigenstrat data - alternative version
 #'
 #'A function that takes paths to an eigenstrat trio (ind, snp and geno file) and
 #'returns the pairwise mismatch rate for all pairs on a thinned set of SNPs.
@@ -21,6 +24,7 @@
 # - nsnps [numeric]: the number of overlapping snps that were compared for each pair.
 # - mismatch [numeric]: the number of sites which did not match for each pair.
 # - pmr [numeric]: the pairwise mismatch rate (mismatch/nsnps).
+#' @import data.table
 #' @export
 #'
 #' @examples
@@ -176,8 +180,10 @@ processEigenstrat <- function(indfile, genofile, snpfile,
     cat('Starting to read in genotype data.\n')
   }
   pb1 = utils::txtProgressBar(min=1,max=length(geno_list),initial=1,style=3)
+  dt <- data.table::fread(genofile, col.names = "snp", colClasses = "character")
   for(i in 1:n_ind){
-    geno_list[[i]] <- (system(paste0('cut -c ',ind$row_number[i],' ',genofile),intern=T) %>% dplyr::na_if("9"))[snps$relative_pos]
+    dt[, digit := stringr::str_sub(snp, ind$row_number[i], ind$row_number[i]),]
+    geno_list[[i]] <- (dt[[2]] %>% dplyr::na_if("9"))[snps$relative_pos]
     utils::setTxtProgressBar(pb1,i)
 
   }
