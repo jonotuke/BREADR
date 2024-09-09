@@ -83,3 +83,7 @@ e.g.: R/plotLOAF.R
 ## Patch 2023-04-12
 
 * Found an error in read functions that causing error in PMR. Fixed. 
+
+## Patch 2024-09-09
+
+* Fixed processEigenstrat so that works on windows machines. 

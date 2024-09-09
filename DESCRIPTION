@@ -1,6 +1,6 @@
 Package: BREADR
 Title: Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     c(
     person(
@@ -36,8 +36,7 @@ Description: The goal of the package is to provide an easy-to-use method
   for estimating degrees of relatedness (up to the second degree) 
   for extreme low-coverage data. The package also allows users to 
   quantify and visualise the level of confidence in the estimated 
-  degrees of relatedness. A paper describing the method is available 
-  at Rohrlach, A. B. et al (2023) <https://www.biorxiv.org/content/10.1101/2023.04.17.537144v1>. 
+  degrees of relatedness.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

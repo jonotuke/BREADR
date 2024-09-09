@@ -1,0 +1,14 @@
+callRelatedness         callRelatedness
+counts_example          counts_example
+get_column_new          get column
+plotLOAF                plotLOAF
+plotSLICE               plotSLICE
+processEigenstrat       process Eigenstrat data - alternative version
+processEigenstrat_old   process Eigenstrat data
+read_ind                read_ind
+read_snp                read_snp
+relatedness_example     relatedness_example
+saveSLICES              saveSLICES
+sim_geno                sim_geno
+split_line              split line
+test_degree             test_degree
