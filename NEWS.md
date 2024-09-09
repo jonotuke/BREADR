@@ -1,5 +1,3 @@
-# BREADR 1.0.3
-
 # BREADR 1.0.2
 
 * Problem with processEigenstrat as it used a bash cut function native to linux and mac, but not available on Windows. The old version is still available as processEigenstrat_old.
