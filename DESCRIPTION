@@ -1,6 +1,6 @@
 Package: BREADR
 Title: Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     c(
     person(
