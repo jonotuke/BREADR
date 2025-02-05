@@ -41,8 +41,6 @@ In this paper we present the R-package `BREADR` (**B**iological **RE**latedness 
 
 `BREADR` is an R package for use in ancient DNA studies, and any studies estimating genetic kinship with extremely low-coverage DNA sequence data, such as in the forensic sciences. `BREADR` is designed to be a user-friendly software package, using as input pseudo-haploid genotype data in the Eigenstrat format, common in aDNA studies, and allowing for pre-processing quality control by researchers.
 
-`BREADR` produces ready-for-publication results and diagnostic plots, and has already seen use in a number of publications [@rivollat:2023; @penske:2024; @gretzinger:2024; @ghalichi:2024; @pilli:2024].
-
 # State of the Field
 
 Most software packages for estimating genetic relatedness from aDNA sequence data leverage some measure of pairwise genetic dissimilarity, often calculated on pseudo-haploid data, where a random call is sampled for each site, to avoid the issue of phasing.
@@ -56,6 +54,10 @@ KIN [@popli:2023] and ancIBD [@ringbauer:2023] instead use the spatial distribut
 READ and READv2 use the so-called pairwise-mismatch rate (PMR) to estimate the proportion of overlapping sites for which two individuals have non-matching genotype calls [@monroy:2018; @alaccamli:2024]. The PMR was first introduced to overcome the limitations of low-coverage aDNA, however, the publication from Kennett *et al.* did not include a hard-classification method [@kennett:2017]. Where Kennett *et al.* used all of the available overlapping sites to estimate the PMR, READ uses a 1MB windowed approach to sample from the distribution of the PMR, but also to account for the effects of linkage disequilibrium (LD), allowing for the automated hard classification of degrees of relatedness. READv2, however, uses a genome-wide estimate in place of the windowed approach of READ.
 
 Like READ and READv2, BREARD estimates the PMR, but instead thins the data to reduce the effects of LD. The PMR on this thinned data can now be reasonably expected to follow a binomial distribution, and theoretical expectations of the PMR are derived and compared to the observed value. From this, statistically rigorous measures of uncertainty are derived, and informative diagnostic plots of the degree of related for pairs of individuals can be produced. Finally, although BREADR only classifies degrees of related up to the second-degree, we also allow for tests of any degree up to the tenth-degree to be formally tested when considering potential pedigree reconstructions.
+
+# Current Applications
+
+`BREADR` produces ready-for-publication results and diagnostic plots, and has already seen use in a number of publications [@rivollat:2023; @penske:2024; @gretzinger:2024; @ghalichi:2024; @pilli:2024].
 
 # Estimating Degrees of Relatedness
 
