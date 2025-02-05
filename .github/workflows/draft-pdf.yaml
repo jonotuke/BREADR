@@ -1,6 +1,10 @@
 name: Draft PDF
-on: [push]
-workflow_dispatch:
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
 
 jobs:
   paper:
