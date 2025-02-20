@@ -37,7 +37,7 @@ Robust and reliable estimates of how individuals are biologically related to eac
 
 In this paper we present the R-package `BREADR` (**B**iological **RE**latedness from **A**ncient **D**NA in **R**), which leverages the so-called pairwise mismatch rate, calculated on optimally-filtered genome-wide pseudo-haploid sequence data, to estimate genetic relatedness up to the second degree, assuming an underlying binomial distribution. `BREADR` also returns a posterior probability for each degree of relatedness, from identical twins/same individual, first-degree, second-degree or “unrelated” pairs, allowing researchers to quantify and report the uncertainty, even for very low-coverage data. We show that this method accurately recovers degrees of relatedness for sequence data with coverage as low as 0.04X using simulated data.
 
-# Statement of  Need
+# Statement of need
 
 `BREADR` is an R package for use in ancient DNA studies, and any studies estimating genetic kinship with extremely low-coverage DNA sequence data, such as in the forensic sciences. `BREADR` is designed to be a user-friendly software package, using as input pseudo-haploid genotype data in the Eigenstrat format, common in aDNA studies, and allowing for pre-processing quality control by researchers.
 
