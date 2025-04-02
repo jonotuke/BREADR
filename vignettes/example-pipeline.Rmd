@@ -25,9 +25,9 @@ This basic example shows you how to analyse a real (anonymised) ancient DNA data
 An analysis would normally start by defining paths to all three Eigenstrat files, i.e.,
 
 ```{r}
-ind_path <- "path_to_eigenstrat_indfile"
-snp_path <- "path_to_eigenstrat_snpfile"
-geno_path <- "path_to_eigenstrat_genofile"
+ind_path <- "path/to/eigenstrat/indfile"
+snp_path <- "path/to/eigenstrat/snpfile"
+geno_path <- "path/to/eigenstrat/genofile"
 ```
 
 and we would then preprocess this data using the processEigenstrat() function,
@@ -57,14 +57,23 @@ Note that since the Eigenstrat files are too large to include, we provide a pre-
 
 We now load the counts_example tibble. 
 
-```{r example}
+```{r example, eval = FALSE}
 library(BREADR)
+counts_example
+```
+
+```{r, echo = FALSE}
 counts_example
 ```
 
 We can we can estimate the degrees of relatedness from the raw counts using the callRelatedness() function. Users have the option to change the prior probability for each degree of relatedness (class_prior) from the default uniform prior, to define the expected PMR (average_relatedness) for a pair of unrelated individuals from the default of the sample median, and to set the minimum number of overlapping SNPs required for a pair of individuals (filter_n) to be included in the analysis from the default of 1. If the user decides to use the sample median as an estimate for the expected PMR for a pair of unrelated individuals, the minimum number of overlapping SNPs for a pair (median_co) can be changed from the default of 500.
 
-```{r}
+```{r, eval = FALSE}
+relatedness_example <- callRelatedness(counts_example)
+relatedness_example
+```
+
+```{r, echo = FALSE}
 relatedness_example <- callRelatedness(counts_example)
 relatedness_example
 ```
