@@ -32,3 +32,11 @@ You can install the development version of BREADR from
 # install.packages("remotes")
 remotes::install_github("jonotuke/BREADR")
 ```
+
+## Contributing to BREADR
+
+Please note that `BREADR` is work in progress! If you are interested in
+the project and want to know more please feel free to contact Jono Tuke
+(<simon.tuke@adelaide.edu.au>). If you find a bug or would like to see
+new or improved features, please open an issue on the
+[GitHub](https://github.com/jonotuke/BREADR) repository.
