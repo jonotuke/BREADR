@@ -68,3 +68,4 @@ Depends:
     R (>= 2.10)
 LazyData: true
 Language: en-US
+VignetteBuilder: knitr

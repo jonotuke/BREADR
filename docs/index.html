@@ -5,58 +5,50 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="The goal of the package is to provide an easy-to-use method for estimating degrees of relatedness (up to the second degree) for extreme low-coverage data. The package also allows users to quantify and visualise the level of confidence in the estimated degrees of relatedness. A paper describing the method is available at Rohrlach, A. B. et al (2023) &lt;https://www.biorxiv.org/content/10.1101/2023.04.17.537144v1&gt;.">
 <title>Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data • BREADR</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data">
-<meta property="og:description" content="The goal of the package is to provide an easy-to-use method for estimating degrees of relatedness (up to the second degree) for extreme low-coverage data. The package also allows users to quantify and visualise the level of confidence in the estimated degrees of relatedness. A paper describing the method is available at Rohrlach, A. B. et al (2023) &lt;https://www.biorxiv.org/content/10.1101/2023.04.17.537144v1&gt;.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data">
+<meta name="description" content="The goal of the package is to provide an easy-to-use method for estimating degrees of relatedness (up to the second degree) for extreme low-coverage data. The package also allows users to quantify and visualise the level of confidence in the estimated degrees of relatedness.">
+<meta property="og:description" content="The goal of the package is to provide an easy-to-use method for estimating degrees of relatedness (up to the second degree) for extreme low-coverage data. The package also allows users to quantify and visualise the level of confidence in the estimated degrees of relatedness.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">BREADR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/example-pipeline.html">Example pipeline</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/jonotuke/BREADR/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/jonotuke/BREADR/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -77,95 +69,6 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jonotuke/BREADR"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h2>
-<p>This basic example shows you how to analyse a real (anonymised) ancient DNA data set.</p>
-<p>An analysis would normally start by defining paths to all three Eigenstrat files, i.e.,</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ind_path</span> <span class="op">&lt;-</span> <span class="st">'path_to_eigenstrat_indfile'</span></span>
-<span><span class="va">snp_path</span> <span class="op">&lt;-</span> <span class="st">'path_to_eigenstrat_snpfile'</span></span>
-<span><span class="va">geno_path</span> <span class="op">&lt;-</span> <span class="st">'path_to_eigenstrat_genofile'</span></span></code></pre></div>
-<p>and we would then preprocess this data using the processEigenstrat() function,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">counts_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/processEigenstrat.html">processEigenstrat</a></span><span class="op">(</span>indfile <span class="op">=</span> <span class="va">ind_path</span>, snpfile <span class="op">=</span> <span class="va">snp_path</span>, genofile <span class="op">=</span> <span class="va">geno_path</span><span class="op">)</span></span></code></pre></div>
-<p>Since this step is the most computationally expensive, we include an option to automatically save the output as a TSV upon completion of the preprocessing, i.e, to avoid repeating the preprocessing</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">counts_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/processEigenstrat.html">processEigenstrat</a></span><span class="op">(</span>indfile <span class="op">=</span> <span class="va">ind_path</span>, snpfile <span class="op">=</span> <span class="va">snp_path</span>, genofile <span class="op">=</span> <span class="va">geno_path</span>, </span>
-<span>                                    outfile <span class="op">=</span> <span class="st">'path_to_save_tsv'</span><span class="op">)</span></span></code></pre></div>
-<p>Also included are options to change the minimum distance between overlapping sites (filter_length) from the default <span class="math inline">1 × 10<sup>5</sup>,</span> an option to only include individuals (pop_pattern) from certain populations (as defined in the ind file) and an option to remove C-&gt;T and G-&gt;A SNPs to avoid the effects of deamination.</p>
-<p>Note that since the Eigenstrat files are too large to include, we provide a pre-processed data set called counts_example which is the product of running processEigenstrat() on real data (although the raw Eigenstrat files can be found on the Github page).</p>
-<p>We now load the counts_example tibble.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonotuke/BREADR" class="external-link">BREADR</a></span><span class="op">)</span></span>
-<span><span class="va">counts_example</span></span>
-<span><span class="co">#&gt;           pair nsnps mismatch       pmr</span></span>
-<span><span class="co">#&gt; 1  Ind1 - Ind2  1518      310 0.2042161</span></span>
-<span><span class="co">#&gt; 2  Ind1 - Ind3  9435     2093 0.2218336</span></span>
-<span><span class="co">#&gt; 3  Ind1 - Ind4  8283     1854 0.2238319</span></span>
-<span><span class="co">#&gt; 4  Ind1 - Ind5  1336      314 0.2350299</span></span>
-<span><span class="co">#&gt; 5  Ind1 - Ind6  2242      481 0.2145406</span></span>
-<span><span class="co">#&gt; 6  Ind2 - Ind3  9119     1988 0.2180064</span></span>
-<span><span class="co">#&gt; 7  Ind2 - Ind4  7984     1699 0.2128006</span></span>
-<span><span class="co">#&gt; 8  Ind2 - Ind5  1179      270 0.2290076</span></span>
-<span><span class="co">#&gt; 9  Ind2 - Ind6  1965      423 0.2152672</span></span>
-<span><span class="co">#&gt; 10 Ind3 - Ind4 20952     2253 0.1075315</span></span>
-<span><span class="co">#&gt; 11 Ind3 - Ind5  7994     1703 0.2130348</span></span>
-<span><span class="co">#&gt; 12 Ind3 - Ind6 10994     2398 0.2181190</span></span>
-<span><span class="co">#&gt; 13 Ind4 - Ind5  6924     1451 0.2095609</span></span>
-<span><span class="co">#&gt; 14 Ind4 - Ind6  9745     2141 0.2197024</span></span>
-<span><span class="co">#&gt; 15 Ind5 - Ind6  1739      383 0.2202415</span></span></code></pre></div>
-<p>We can we can estimate the degrees of relatedness from the raw counts using the callRelatedness() function. Users have the option to change the prior probability for each degree of relatedness (class_prior) from the default uniform prior, to define the expected PMR (average_relatedness) for a pair of unrelated individuals from the default of the sample median, and to set the minimum number of overlapping SNPs required for a pair of individuals (filter_n) to be included in the analysis from the default of 1. If the user decides to use the sample median as an estimate for the expected PMR for a pair of unrelated individuals, the minimum number of overlapping SNPs for a pair (median_co) can be changed from the default of 500.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">relatedness_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/callRelatedness.html">callRelatedness</a></span><span class="op">(</span><span class="va">counts_example</span><span class="op">)</span></span>
-<span><span class="va">relatedness_example</span></span>
-<span><span class="co">#&gt; # A tibble: 15 × 12</span></span>
-<span><span class="co">#&gt;      row pair       relationship   pmr      sd mismatch nsnps ave_rel Same_Twins</span></span>
-<span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;      &lt;fct&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1     1 Ind1 - In… Unrelated    0.204 0.0103       310  1518   0.218  6.71e- 26</span></span>
-<span><span class="co">#&gt;  2     2 Ind1 - In… Unrelated    0.222 0.00428     2093  9435   0.218  1.22e-214</span></span>
-<span><span class="co">#&gt;  3     3 Ind1 - In… Unrelated    0.224 0.00458     1854  8283   0.218  2.00e-194</span></span>
-<span><span class="co">#&gt;  4     4 Ind1 - In… Unrelated    0.235 0.0116       314  1336   0.218  2.68e- 37</span></span>
-<span><span class="co">#&gt;  5     5 Ind1 - In… Unrelated    0.215 0.00867      481  2242   0.218  9.82e- 46</span></span>
-<span><span class="co">#&gt;  6     6 Ind2 - In… Unrelated    0.218 0.00432     1988  9119   0.218  5.06e-195</span></span>
-<span><span class="co">#&gt;  7     7 Ind2 - In… Unrelated    0.213 0.00458     1699  7984   0.218  4.95e-156</span></span>
-<span><span class="co">#&gt;  8     8 Ind2 - In… Unrelated    0.229 0.0122       270  1179   0.218  1.80e- 30</span></span>
-<span><span class="co">#&gt;  9     9 Ind2 - In… Unrelated    0.215 0.00927      423  1965   0.218  1.10e- 40</span></span>
-<span><span class="co">#&gt; 10    10 Ind3 - In… Same_Twins   0.108 0.00214     2253 20952   0.218  1   e+  0</span></span>
-<span><span class="co">#&gt; 11    11 Ind3 - In… Unrelated    0.213 0.00458     1703  7994   0.218  6.83e-157</span></span>
-<span><span class="co">#&gt; 12    12 Ind3 - In… Unrelated    0.218 0.00394     2398 10994   0.218  2.05e-235</span></span>
-<span><span class="co">#&gt; 13    13 Ind4 - In… Unrelated    0.210 0.00489     1451  6924   0.218  1.92e-127</span></span>
-<span><span class="co">#&gt; 14    14 Ind4 - In… Unrelated    0.220 0.00419     2141  9745   0.218  2.95e-214</span></span>
-<span><span class="co">#&gt; 15    15 Ind5 - In… Unrelated    0.220 0.00994      383  1739   0.218  3.64e- 39</span></span>
-<span><span class="co">#&gt; # ℹ 3 more variables: First_Degree &lt;dbl&gt;, Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;</span></span></code></pre></div>
-<p>An overall picture of the relatedness for these individuals can be created, which displays the highest posterior probability degree of relatedness for each pair of individuals, indicated by the colour and shape of the points with 95% confidence intervals. The dashed horizontal lines indicated the expected values for each degree of relatedness.</p>
-<p>Users can choose to remove individuals with less than a user-defined number of overlapping SNPs (nsnps_cutoff). In large data sets, it is expected that the vast majority of individuals will be unrelated, and so the user may wish to only plot the more closely related individuals. TO this end, the user may choose to plot only the first <span class="math inline"><em>N</em></span> individuals (using the input parameter N), which have been sorted by PMR value, in ascending order.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plotLOAF.html">plotLOAF</a></span><span class="op">(</span><span class="va">relatedness_example</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No minimum number of overlapping SNPs given.</span></span>
-<span><span class="co">#&gt; Using default minimum of 500.</span></span>
-<span><span class="co">#&gt; No upper limit on number of pairs to plot given.</span></span>
-<span><span class="co">#&gt; Plotting first 15 pairs.</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"></p>
-<p>A plot for the assignment of the “Unrelated” degree of relatedness to individuals Ind1 and Ind2 can be produced which shows diagnostic information about the estimated genetic relatedness between a single pair of individuals. In the left panel, the distribution of PMR values for each degree of relatedness, given the number of overlapping SNPs, with the observed PMR (and 95% confidence interval) displayed below this. In the right panel are the normalised posterior probabilities for the each of the degrees of relatedness, indicating the certainty with which the degree of relatedness with the highest posterior probability was chosen.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="100%"></p>
-<p>Alternatively we can choose the row using the full pair name instead of the row number.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
-<p>We can test whether the observed PMR between Ind1 and Ind2 is consistent with a 3rd-degree genetic relationship, or not, but any degree of relatedness from 0 to 10 can be investigated. This function returns the p-value from the associated binomial test, and by setting verbose to TRUE, all diagnostic output from the test can be displayed</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/test_degree.html">test_degree</a></span><span class="op">(</span><span class="va">relatedness_example</span>, <span class="fl">1</span>, <span class="fl">3</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Testing H0       : "Ind1 - Ind2" are 3rd-degree relatives.</span></span>
-<span><span class="co">#&gt; Expected PMR     : 0.2044</span></span>
-<span><span class="co">#&gt; Observed PMR     : 0.2042</span></span>
-<span><span class="co">#&gt; Estimated degree : 2.9826</span></span>
-<span><span class="co">#&gt; p-value          : 0.9823</span></span>
-<span><span class="co">#&gt; Decision         : Retain H0</span></span>
-<span><span class="co">#&gt; [1] 0.9823165</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -219,15 +122,15 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

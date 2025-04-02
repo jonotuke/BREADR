@@ -1,9 +1,9 @@
-pandoc: '3.2'
-pkgdown: 2.0.9
+pandoc: '3.4'
+pkgdown: 2.1.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2024-09-09T08:59Z
+articles:
+  example-pipeline: example-pipeline.html
+last_built: 2025-04-01T23:55Z
 urls:
   reference: https://jonotuke.github.io/BREADR/reference
   article: https://jonotuke.github.io/BREADR/articles
-
