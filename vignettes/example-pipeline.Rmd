@@ -53,7 +53,10 @@ counts_example <- processEigenstrat(
 
 Also included are options to change the minimum distance between overlapping sites (filter_length) from the default $1\times 10^5,$ an option to only include individuals (pop_pattern) from certain populations (as defined in the ind file) and an option to remove C->T and G->A SNPs to avoid the effects of deamination.
 
-Note that since the Eigenstrat files are too large to include, we provide a pre-processed data set called counts_example which is the product of running processEigenstrat() on real data (although the raw Eigenstrat files can be found on the Github page). 
+ Note that since the Eigenstrat files are too large to include, we 
+ provide a pre-processed data set called [counts_example](https://github.com/jonotuke/BREADR/blob/master/data/counts_example.rda) which is the 
+ product of running processEigenstrat() on real data (although the raw 
+ Eigenstrat files can be found on [the Github page](https://github.com/jonotuke/BREADR/tree/master/data-raw)). 
 
 We now load the counts_example tibble. 
 

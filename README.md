@@ -17,6 +17,9 @@ The method requires Eigenstrat files (an ind, geno and snp file) to
 begin, allowing the user to account for DNA deamination when genotyping
 their data.
 
+Further information can be found at the [BREADR
+website](https://jonotuke.github.io/BREADR/).
+
 ## Installation
 
 To install, you can use the usual

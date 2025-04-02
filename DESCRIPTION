@@ -65,7 +65,7 @@ Imports:
     stringr,
     tibble
 Depends: 
-    R (>= 2.10)
+    R (>= 4.2)
 LazyData: true
 Language: en-US
 VignetteBuilder: knitr
