@@ -75,9 +75,9 @@ ancient DNA data set.</p>
 <p>An analysis would normally start by defining paths to all three
 Eigenstrat files, i.e.,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ind_path</span> <span class="op">&lt;-</span> <span class="st">"path_to_eigenstrat_indfile"</span></span>
-<span><span class="va">snp_path</span> <span class="op">&lt;-</span> <span class="st">"path_to_eigenstrat_snpfile"</span></span>
-<span><span class="va">geno_path</span> <span class="op">&lt;-</span> <span class="st">"path_to_eigenstrat_genofile"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ind_path</span> <span class="op">&lt;-</span> <span class="st">"path/to/eigenstrat/indfile"</span></span>
+<span><span class="va">snp_path</span> <span class="op">&lt;-</span> <span class="st">"path/to/eigenstrat/snpfile"</span></span>
+<span><span class="va">geno_path</span> <span class="op">&lt;-</span> <span class="st">"path/to/eigenstrat/genofile"</span></span></code></pre></div>
 <p>and we would then preprocess this data using the processEigenstrat()
 function,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -109,8 +109,8 @@ Eigenstrat files can be found on the Github page).</p>
 <p>We now load the counts_example tibble.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonotuke/BREADR" class="external-link">BREADR</a></span><span class="op">)</span></span>
-<span><span class="va">counts_example</span></span>
-<span><span class="co">#&gt;           pair nsnps mismatch       pmr</span></span>
+<span><span class="va">counts_example</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;           pair nsnps mismatch       pmr</span></span>
 <span><span class="co">#&gt; 1  Ind1 - Ind2  1518      310 0.2042161</span></span>
 <span><span class="co">#&gt; 2  Ind1 - Ind3  9435     2093 0.2218336</span></span>
 <span><span class="co">#&gt; 3  Ind1 - Ind4  8283     1854 0.2238319</span></span>
@@ -125,7 +125,7 @@ Eigenstrat files can be found on the Github page).</p>
 <span><span class="co">#&gt; 12 Ind3 - Ind6 10994     2398 0.2181190</span></span>
 <span><span class="co">#&gt; 13 Ind4 - Ind5  6924     1451 0.2095609</span></span>
 <span><span class="co">#&gt; 14 Ind4 - Ind6  9745     2141 0.2197024</span></span>
-<span><span class="co">#&gt; 15 Ind5 - Ind6  1739      383 0.2202415</span></span></code></pre></div>
+<span><span class="co">#&gt; 15 Ind5 - Ind6  1739      383 0.2202415</span></span></code></pre>
 <p>We can we can estimate the degrees of relatedness from the raw counts
 using the callRelatedness() function. Users have the option to change
 the prior probability for each degree of relatedness (class_prior) from
@@ -137,10 +137,10 @@ included in the analysis from the default of 1. If the user decides to
 use the sample median as an estimate for the expected PMR for a pair of
 unrelated individuals, the minimum number of overlapping SNPs for a pair
 (median_co) can be changed from the default of 500.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">relatedness_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callRelatedness.html">callRelatedness</a></span><span class="op">(</span><span class="va">counts_example</span><span class="op">)</span></span>
-<span><span class="va">relatedness_example</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 12</span></span></span>
+<span><span class="va">relatedness_example</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 12</span></span></span>
 <span><span class="co">#&gt;      row pair       relationship   pmr      sd mismatch nsnps ave_rel Same_Twins</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 Ind1 - In… Unrelated    0.204 0.010<span style="text-decoration: underline;">3</span>       310  <span style="text-decoration: underline;">1</span>518   0.218  6.71<span style="color: #949494;">e</span><span style="color: #BB0000;">- 26</span></span></span>
@@ -158,7 +158,7 @@ unrelated individuals, the minimum number of overlapping SNPs for a pair
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>    13 Ind4 - In… Unrelated    0.210 0.004<span style="text-decoration: underline;">89</span>     <span style="text-decoration: underline;">1</span>451  <span style="text-decoration: underline;">6</span>924   0.218  1.92<span style="color: #949494;">e</span><span style="color: #BB0000;">-127</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>    14 Ind4 - In… Unrelated    0.220 0.004<span style="text-decoration: underline;">19</span>     <span style="text-decoration: underline;">2</span>141  <span style="text-decoration: underline;">9</span>745   0.218  2.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-214</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>    15 Ind5 - In… Unrelated    0.220 0.009<span style="text-decoration: underline;">94</span>      383  <span style="text-decoration: underline;">1</span>739   0.218  3.64<span style="color: #949494;">e</span><span style="color: #BB0000;">- 39</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: First_Degree &lt;dbl&gt;, Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: First_Degree &lt;dbl&gt;, Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;</span></span></span></code></pre>
 <p>An overall picture of the relatedness for these individuals can be
 created, which displays the highest posterior probability degree of
 relatedness for each pair of individuals, indicated by the colour and
@@ -172,13 +172,13 @@ this end, the user may choose to plot only the first
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
 individuals (using the input parameter N), which have been sorted by PMR
 value, in ascending order.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotLOAF.html">plotLOAF</a></span><span class="op">(</span><span class="va">relatedness_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; No minimum number of overlapping SNPs given.</span></span>
 <span><span class="co">#&gt; Using default minimum of 500.</span></span>
 <span><span class="co">#&gt; No upper limit on number of pairs to plot given.</span></span>
 <span><span class="co">#&gt; Plotting first 15 pairs.</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>A plot for the assignment of the “Unrelated” degree of relatedness to
 individuals Ind1 and Ind2 can be produced which shows diagnostic
 information about the estimated genetic relatedness between a single
@@ -189,21 +189,21 @@ this. In the right panel are the normalised posterior probabilities for
 the each of the degrees of relatedness, indicating the certainty with
 which the degree of relatedness with the highest posterior probability
 was chosen.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>Alternatively we can choose the row using the full pair name instead
 of the row number.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>We can test whether the observed PMR between Ind1 and Ind2 is
 consistent with a 3rd-degree genetic relationship, or not, but any
 degree of relatedness from 0 to 10 can be investigated. This function
 returns the p-value from the associated binomial test, and by setting
 verbose to TRUE, all diagnostic output from the test can be
 displayed</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/test_degree.html">test_degree</a></span><span class="op">(</span><span class="va">relatedness_example</span>, <span class="fl">1</span>, <span class="fl">3</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Testing H0       : "Ind1 - Ind2" are 3rd-degree relatives.</span></span>
 <span><span class="co">#&gt; Expected PMR     : 0.2044</span></span>
