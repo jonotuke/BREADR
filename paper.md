@@ -209,5 +209,9 @@ Wolfgang Haak conceived the method, reviewed drafts of the paper and edited subm
 
 We thank Harald Ringbauer, Nigel Bean and Vincent Braunack-Mayer for important and enlightening discussions regarding the manuscript.
 
+# Funding
+
+This research was financed by the Max Planck Society and the European Research Council under the European Union’s Horizon 2020 research and innovation programme (grant agreement numbers 771234-PALEoRIDER, W.H.; 101141408-ROAMANCE, W.H.).
+
 # References
 
