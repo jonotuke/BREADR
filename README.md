@@ -36,6 +36,24 @@ You can install the development version of BREADR from
 remotes::install_github("jonotuke/BREADR")
 ```
 
+ALso to ensure that BREADR install correctly, we suggest installing the
+following packages
+
+- Matrix,
+- data.table,
+- dplyr,
+- forcats,
+- ggplot2,
+- ggpubr,
+- grDevices,
+- magrittr,
+- MASS,
+- matrixStats,
+- purrr,
+- readr,
+- stringr and
+- tibble.
+
 ## Contributing to BREADR
 
 Please note that `BREADR` is work in progress! If you are interested in

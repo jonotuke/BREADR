@@ -48,7 +48,8 @@ Suggests:
     spelling, 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0), 
+    Matrix
 Config/testthat/edition: 3
 Imports: 
     data.table,
@@ -63,9 +64,9 @@ Imports:
     purrr,
     readr,
     stringr,
-    tibble
+    tibble 
 Depends: 
-    R (>= 4.2)
+    R (>= 4.4)
 LazyData: true
 Language: en-US
 VignetteBuilder: knitr
