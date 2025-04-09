@@ -40,7 +40,7 @@ You can install the development version of BREADR from [GitHub](https://github.c
 remotes::install_github("jonotuke/BREADR")
 ```
 
-ALso to ensure that BREADR install correctly, we suggest installing the following packages
+Also to ensure that BREADR install correctly, we suggest installing the following packages
 
 - Matrix, 
 - data.table,
