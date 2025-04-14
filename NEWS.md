@@ -1,5 +1,9 @@
 # BREADR (development version)
 
+# BREADR 1.0.3
+
+* Reviewer for JOSS noticed that needed a later version than in description due to a call to the Matrix package. So added later R version requirement. 
+
 # BREADR 1.0.2
 
 * Problem with processEigenstrat as it used a bash cut function native to linux and mac, but not available on Windows. The old version is still available as processEigenstrat_old.

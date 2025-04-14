@@ -91,3 +91,7 @@ e.g.: R/plotLOAF.R
 ## Resubmission 2024-09-09
 
 Mistakenly left repdev checking in folder - now removed. 
+
+## Patch 2025-04-14
+
+Submitting paper to JOSS. Reviewer could only install if R4.4, so changed to this from their recommendation. 
