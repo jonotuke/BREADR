@@ -35,13 +35,11 @@ keep-tex: true
 
 Robust and reliable estimates of how individuals are biologically related to each other are a key source of information when reconstructing pedigrees. In combination with contextual data, reconstructed pedigrees can be used to infer possible kinship practices in prehistoric populations. However, standard methods to estimate biological relatedness from genome sequence data cannot be applied to low coverage sequence data, such as are common in ancient DNA (aDNA) studies. Critically, a statistically robust method for assessing and quantifying the confidence of a classification of a specific degree of relatedness for a pair of individuals, using low coverage genome data, is lacking.
 
-In this paper we present the R-package `BREADR` (**B**iological **RE**latedness from **A**ncient **D**NA in **R**), which leverages the so-called pairwise mismatch rate, calculated on optimally-filtered genome-wide pseudo-haploid sequence data, to estimate genetic relatedness up to the second degree, assuming an underlying binomial distribution. `BREADR` also returns a posterior probability for each degree of relatedness, from identical twins/same individual, first-degree, second-degree or “unrelated” pairs, allowing researchers to quantify and report the uncertainty, even for very low-coverage data. We show that this method accurately recovers degrees of relatedness for sequence data with coverage as low as 0.04X using simulated data.
+In this paper we present the R-package `BREADR` (**B**iological **RE**latedness from **A**ncient **D**NA in **R**), which leverages the so-called pairwise mismatch rate, calculated on optimally-filtered genome-wide pseudo-haploid sequence data, to estimate genetic relatedness up to the second degree, assuming an underlying binomial distribution. `BREADR` also returns a posterior probability for each degree of relatedness, from identical twins/same individual, first-degree, second-degree or “unrelated” pairs, allowing researchers to quantify and report the uncertainty, even for very low-coverage data. We show that this method accurately recovers degrees of relatedness for sequence data with coverage as low as 0.04X using simulated data (produced as in Popli et al.[@popli:2023]).
 
-# Statement of  Need
+# Statement of need
 
 `BREADR` is an R package for use in ancient DNA studies, and any studies estimating genetic kinship with extremely low-coverage DNA sequence data, such as in the forensic sciences. `BREADR` is designed to be a user-friendly software package, using as input pseudo-haploid genotype data in the Eigenstrat format, common in aDNA studies, and allowing for pre-processing quality control by researchers.
-
-`BREADR` produces ready-for-publication results and diagnostic plots, and has already seen use in a number of publications [@rivollat:2023; @penske:2024; @gretzinger:2024; @ghalichi:2024; @pilli:2024].
 
 # State of the Field
 
@@ -56,6 +54,10 @@ KIN [@popli:2023] and ancIBD [@ringbauer:2023] instead use the spatial distribut
 READ and READv2 use the so-called pairwise-mismatch rate (PMR) to estimate the proportion of overlapping sites for which two individuals have non-matching genotype calls [@monroy:2018; @alaccamli:2024]. The PMR was first introduced to overcome the limitations of low-coverage aDNA, however, the publication from Kennett *et al.* did not include a hard-classification method [@kennett:2017]. Where Kennett *et al.* used all of the available overlapping sites to estimate the PMR, READ uses a 1MB windowed approach to sample from the distribution of the PMR, but also to account for the effects of linkage disequilibrium (LD), allowing for the automated hard classification of degrees of relatedness. READv2, however, uses a genome-wide estimate in place of the windowed approach of READ.
 
 Like READ and READv2, BREARD estimates the PMR, but instead thins the data to reduce the effects of LD. The PMR on this thinned data can now be reasonably expected to follow a binomial distribution, and theoretical expectations of the PMR are derived and compared to the observed value. From this, statistically rigorous measures of uncertainty are derived, and informative diagnostic plots of the degree of related for pairs of individuals can be produced. Finally, although BREADR only classifies degrees of related up to the second-degree, we also allow for tests of any degree up to the tenth-degree to be formally tested when considering potential pedigree reconstructions.
+
+# Current Applications
+
+`BREADR` produces ready-for-publication results and diagnostic plots, and has already seen use in a number of publications [@rivollat:2023; @penske:2024; @gretzinger:2024; @ghalichi:2024; @pilli:2024].
 
 # Estimating Degrees of Relatedness
 
@@ -189,9 +191,27 @@ We concede that `BREADR` has the same limitations of any method that relies on e
 
 The usefulness for researchers to be able assign statistical confidence to each and every estimated degree of relatedness, even in cases when coverage is extremely low, is critical when reconstructing a pedigree. We have also shown that when `BREADR` misclassifies genetic relationships, it is due to a true closer genetic relationship (third-degree genetic relationships were misclassified as unrelated). The easy-to-use R-implementation of our method makes `BREADR` an attractive, and statistically rigorous tool for researchers in archaeogenetics to employ.
 
+# Data Description
+
+The genetic data is real, but anonymised, ancient DNA data produced in house at the Max Planck Institute for Evolutionary Anthropology, in Leipzig, Germany. The data comes from a site dated to 2350 BCE. The data was produced using the Illumina sequencing platform, and after adapter trimming, reads were aligned to the human reference genome GRCh37 using BWA[@li2009fast] as implemented in EAGER[@peltzer2016eager]. Sequence reads were filtered for a minimum sequence length of 35 and a mapping quality of at least 25. Data was genotyped using pileupCaller[https://github.com/stschiff/sequenceTools/tree/master/src/SequenceTools] using a random pseudohaploid call for each position on the 1240k capture assay[@mathieson2015genome]. The processed genotype data can be found at: https://github.com/jonotuke/BREADR/tree/master/data-raw/.
+
+# Author Contributions
+
+Adam B. Rohrlach conceived, designed and implemented the method, wrote the paper, prepared the figures, performed the computation work, reviewed drafts of the paper and edited submissions.
+
+Jonathan Tuke conceived the method, created and submitted the package to CRAN, reviewed drafts of the paper and edited submissions.
+
+Divya Ratan Popli created and implemented the computations for benchmarking the accuracy and performance of the method, reviewed drafts of the paper and edited submissions.
+
+Wolfgang Haak conceived the method, reviewed drafts of the paper and edited submissions.
+
 # Acknowledgements
 
 We thank Harald Ringbauer, Nigel Bean and Vincent Braunack-Mayer for important and enlightening discussions regarding the manuscript.
+
+# Funding
+
+This research was financed by the Max Planck Society and the European Research Council under the European Union’s Horizon 2020 research and innovation programme (grant agreement numbers 771234-PALEoRIDER, W.H.; 101141408-ROAMANCE, W.H.).
 
 # References
 

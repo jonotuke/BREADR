@@ -1,6 +1,6 @@
 Package: BREADR
 Title: Estimates Degrees of Relatedness (Up to the Second Degree) for Extreme Low-Coverage Data
-Version: 1.0.2.9000
+Version: 1.0.4
 Authors@R: 
     c(
     person(
@@ -48,7 +48,8 @@ Suggests:
     spelling, 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0), 
+    Matrix
 Config/testthat/edition: 3
 Imports: 
     data.table,
@@ -63,8 +64,9 @@ Imports:
     purrr,
     readr,
     stringr,
-    tibble
+    tibble 
 Depends: 
-    R (>= 2.10)
+    R (>= 4.4)
 LazyData: true
 Language: en-US
+VignetteBuilder: knitr

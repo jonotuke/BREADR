@@ -11,3 +11,8 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^inst/notes
+^paper.md
+^Images
+^BREADR.bib
+BREADR.code-workspace
+^Meta$
