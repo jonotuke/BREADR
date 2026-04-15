@@ -1,0 +1,5 @@
+test:
+	Rscript -e "testthat::test_dir('tests/testthat/')"
+
+folder:
+	open .

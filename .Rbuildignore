@@ -16,3 +16,10 @@
 ^BREADR.bib
 BREADR.code-workspace
 ^Meta$
+^dev/
+^.quarto/
+^_output/
+_quarto.yml
+paper2.qmd
+paper2.tex
+makefile
