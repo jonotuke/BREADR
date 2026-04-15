@@ -3,12 +3,12 @@ utils::globalVariables(
 )
 #' plotDOUGH
 #'
-#' @param in_tibble TBA
-#' @param indfile TBA
-#' @param nsnps_cutoff TBA
-#' @param fntsize TBA
-#' @param verbose TBA
-#' @param removeBetween TBA
+#' @param in_tibble A tibble containing the output from processEigenstrat().
+#' @param indfile Path to an ind file with columns for the individuals IDs, genetic sex (not used) and population.
+#' @param nsnps_cutoff Minimum number of overlapping sites for a pair to be included.
+#' @param fntsize Font size for x axis tick labels.
+#' @param verbose Controls the printing of progress to console.
+#' @param removeBetween TRUE/FALSE for whether to include the “between population” PMR values as their own group (FALSE), or to exclude them (TRUE).
 #'
 #' @returns plots
 #'

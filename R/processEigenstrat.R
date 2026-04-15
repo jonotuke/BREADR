@@ -18,8 +18,8 @@ utils::globalVariables(
 #' if NULL, no back up saved. If no outfile, then a tibble is returned.
 #' @param chromosomes the chromosome to filter the data on.
 #' @param verbose controls printing of messages to console
-#' @param byPop boolean
-#' @param minMerge TBA
+#' @param byPop Boolean variable identifying if all pairs of individuals should be compared (FALSE), or just pairs of individuals in the same populations (TRUE)
+#' @param minMerge (integer) the minimum group size (smaller groups are merged).
 #'
 #' @return out_tibble: A tibble containing four columns:
 # - pair [char]: the pair of individuals that are compared.

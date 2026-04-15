@@ -38,9 +38,9 @@ if NULL, no back up saved. If no outfile, then a tibble is returned.}
 
 \item{verbose}{controls printing of messages to console}
 
-\item{byPop}{boolean}
+\item{byPop}{Boolean variable identifying if all pairs of individuals should be compared (FALSE), or just pairs of individuals in the same populations (TRUE)}
 
-\item{minMerge}{TBA}
+\item{minMerge}{(integer) the minimum group size (smaller groups are merged).}
 }
 \value{
 out_tibble: A tibble containing four columns:

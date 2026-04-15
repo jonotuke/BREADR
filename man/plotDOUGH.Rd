@@ -14,17 +14,17 @@ plotDOUGH(
 )
 }
 \arguments{
-\item{in_tibble}{TBA}
+\item{in_tibble}{A tibble containing the output from processEigenstrat().}
 
-\item{indfile}{TBA}
+\item{indfile}{Path to an ind file with columns for the individuals IDs, genetic sex (not used) and population.}
 
-\item{nsnps_cutoff}{TBA}
+\item{nsnps_cutoff}{Minimum number of overlapping sites for a pair to be included.}
 
-\item{fntsize}{TBA}
+\item{fntsize}{Font size for x axis tick labels.}
 
-\item{verbose}{TBA}
+\item{verbose}{Controls the printing of progress to console.}
 
-\item{removeBetween}{TBA}
+\item{removeBetween}{TRUE/FALSE for whether to include the “between population” PMR values as their own group (FALSE), or to exclude them (TRUE).}
 }
 \value{
 plots

@@ -13,15 +13,15 @@ priorSensitivity(
 )
 }
 \arguments{
-\item{in_BREADR}{TBA}
+\item{in_BREADR}{A tibble containing the output of callRelatedness().}
 
-\item{row}{TBA}
+\item{row}{Either the row number or pair name for which the sensitivity analysis should be run.}
 
-\item{degrees}{TBA}
+\item{degrees}{A vector of integers identifying which degrees of relatedness degrees to plot. Same/Twins (1), First-Degree (2), Second-Degree (3) and Unrelated (4).}
 
-\item{grid_space}{TBA}
+\item{grid_space}{The space between prior probability values that are tested (smaller values mean a finer grid size).}
 
-\item{maxPrior}{TBA}
+\item{maxPrior}{Maximum value a prior probability can take (the right-hand limit of the x-axis).}
 }
 \value{
 plot
