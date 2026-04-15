@@ -95,3 +95,7 @@ Mistakenly left repdev checking in folder - now removed.
 ## Patch 2025-04-14
 
 Submitting paper to JOSS. Reviewer could only install if R4.4, so changed to this from their recommendation. 
+
+## Minor 2026-04-16
+
+New functions added. 
