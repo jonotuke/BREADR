@@ -179,7 +179,7 @@ value, in ascending order.</p>
 <span><span class="co">#&gt; Using default minimum of 500.</span></span>
 <span><span class="co">#&gt; No upper limit on number of pairs to plot given.</span></span>
 <span><span class="co">#&gt; Plotting first 15 pairs.</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700"></p>
 <p>A plot for the assignment of the “Unrelated” degree of relatedness to
 individuals Ind1 and Ind2 can be produced which shows diagnostic
 information about the estimated genetic relatedness between a single
@@ -191,13 +191,17 @@ the each of the degrees of relatedness, indicating the certainty with
 which the degree of relatedness with the highest posterior probability
 was chosen.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 4428 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_ribbon()`).</span></span></code></pre></div>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="700"></p>
 <p>Alternatively we can choose the row using the full pair name instead
 of the row number.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 4428 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_ribbon()`).</span></span></code></pre></div>
+<p><img src="example-pipeline_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700"></p>
 <p>We can test whether the observed PMR between Ind1 and Ind2 is
 consistent with a 3rd-degree genetic relationship, or not, but any
 degree of relatedness from 0 to 10 can be investigated. This function
@@ -224,7 +228,7 @@ displayed</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
