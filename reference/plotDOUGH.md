@@ -19,27 +19,29 @@ plotDOUGH(
 
 - in_tibble:
 
-  TBA
+  A tibble containing the output from processEigenstrat().
 
 - indfile:
 
-  TBA
+  Path to an ind file with columns for the individuals IDs, genetic sex
+  (not used) and population.
 
 - nsnps_cutoff:
 
-  TBA
+  Minimum number of overlapping sites for a pair to be included.
 
 - fntsize:
 
-  TBA
+  Font size for x axis tick labels.
 
 - verbose:
 
-  TBA
+  Controls the printing of progress to console.
 
 - removeBetween:
 
-  TBA
+  TRUE/FALSE for whether to include the “between population” PMR values
+  as their own group (FALSE), or to exclude them (TRUE).
 
 ## Value
 

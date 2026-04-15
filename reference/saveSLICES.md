@@ -64,7 +64,7 @@ saveSLICES(relatedness_example[1:3, ], outFolder=tempdir())
 #> (`geom_ribbon()`).
 #>   |                                                                              |======================================================================| 100%
 #> Completed
-#> All plots in: /tmp/Rtmp1ugQM5/
+#> All plots in: /tmp/RtmpHPWAGV/
 #> [1] TRUE
 # }
 ```

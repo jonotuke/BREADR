@@ -68,11 +68,13 @@ processEigenstrat(
 
 - byPop:
 
-  boolean
+  Boolean variable identifying if all pairs of individuals should be
+  compared (FALSE), or just pairs of individuals in the same populations
+  (TRUE)
 
 - minMerge:
 
-  TBA
+  (integer) the minimum group size (smaller groups are merged).
 
 ## Value
 
