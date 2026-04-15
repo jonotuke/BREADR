@@ -3,6 +3,7 @@
 export("%>%")
 export(callRelatedness)
 export(get_column_new)
+export(plotDOUGH)
 export(plotLOAF)
 export(plotSLICE)
 export(processEigenstrat)

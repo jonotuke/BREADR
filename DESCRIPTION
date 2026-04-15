@@ -57,6 +57,7 @@ Imports:
     forcats,
     ggplot2,
     ggpubr,
+    ggstatsplot,
     grDevices,
     magrittr,
     MASS,
@@ -64,7 +65,8 @@ Imports:
     purrr,
     readr,
     stringr,
-    tibble 
+    tibble,
+    tidyr
 Depends: 
     R (>= 4.3)
 LazyData: true
