@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   example-pipeline: example-pipeline.html
-last_built: 2026-04-15T06:21Z
+last_built: 2026-04-16T00:00Z
 urls:
   reference: https://jonotuke.github.io/BREADR/reference
   article: https://jonotuke.github.io/BREADR/articles

@@ -34,5 +34,5 @@ Genotype Data.” *Journal of Open Source Software*, **10**(108), 7916.
       number = {108},
       pages = {7916},
       publisher = {The Open Journal},
-      url = {https://doi.org/10.21105/joss.07916}},
+      url = {https://doi.org/10.21105/joss.07916},
     }

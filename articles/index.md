@@ -2,5 +2,5 @@
 
 ### All vignettes
 
-- [Example
-  pipeline](https://jonotuke.github.io/BREADR/articles/example-pipeline.md):
+- [Example BREADR
+  Analysis](https://jonotuke.github.io/BREADR/articles/example-pipeline.md):

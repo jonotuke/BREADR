@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Example pipeline • BREADR</title>
+<title>Example BREADR Analysis • BREADR</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Example pipeline">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Example BREADR Analysis">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/example-pipeline.html">Example pipeline</a></li>
+<li><a class="dropdown-item" href="../articles/example-pipeline.html">Example BREADR Analysis</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -56,7 +56,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Example pipeline</h1>
+      <h1>Example BREADR Analysis</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/jonotuke/BREADR/blob/master/vignettes/example-pipeline.Rmd" class="external-link"><code>vignettes/example-pipeline.Rmd</code></a></small>
@@ -68,10 +68,82 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jonotuke/BREADR" class="external-link">BREADR</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This basic example shows you how to analyse a real (anonymised)
-ancient DNA data set.</p>
+<p>BREADR (Biological Relatedness from Ancient DNA in R) is a Bayesian
+method for identifying the degrees of relatedness between pairs of
+individuals, especially in cases of extremely low-coverage sequence data
+(as low as 0.04X). BREADR leverages the so-called pairwise mismatch rate
+(PMR), a measure of how much the genotypes of individuals do not match,
+to do this. BREADR assumes an underlying binomial model for the
+proportion of mismatched genotype calls, and calculates posterior
+probabilities for degrees of relatedness up to the second-degree
+(third-degree or higher are defined as “Unrelated”). BREADR works with
+the Eigenstrat data format as an initial input, allowing researchers to
+control for factors such as contamination before BREADR is used.</p>
+<p>We have implemented BREADR in the R statistical programming language,
+and include methods for assigning degrees of relatedness (up to the
+second-degree), testing for whether separate groups of individuals can
+be merged into one analysis, for visualising both pairwise and overall
+relatedness, for sensitivity analyses for changes in the prior
+distributions, and for testing if degrees of relatedness up to the
+tenth-degree are consistent with the observed PMR. This basic example
+shows you how to analyse a real (anonymised) ancient DNA data set.</p>
+</div>
+<div class="section level2">
+<h2 id="the-theory-behind-breadr">The theory behind BREADR<a class="anchor" aria-label="anchor" href="#the-theory-behind-breadr"></a>
+</h2>
+<p>For a comprehensive description of the underlying model used by
+BREADR, please see the <a href="https://doi.org/10.21105/joss.07916" class="external-link">manuscript</a>. However, we
+give a brief overview of the concept here. Consider two individuals
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>,
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">N_{ij}</annotation></semantics></math>
+independent sites in the genome for which genotype calls have been made.
+We count the number of genotypes which do not match, and denote this
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math>.
+We assume that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">X_{ij}</annotation></semantics></math>
+will follow a binomial distribution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>∼</mo><mi>B</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>N</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>,</mo><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">X_{ij} \sim B(N_{ij},p_{ij})</annotation></semantics></math>,
+that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">p_{ij}</annotation></semantics></math>
+is defined by how closely related the two individuals are.</p>
+<p>It is known that if the expected PMR of two unrelated individuals is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{p}</annotation></semantics></math>,
+then the expected PMR for individuals how are related in the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>k</mi><mtext mathvariant="normal">th</mtext></msup><annotation encoding="application/x-tex">k^{\text{th}}</annotation></semantics></math>
+degree will be</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>k</mi></msub><mo>=</mo><mover><mi>p</mi><mo accent="true">‾</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mfrac displaystyle="true"><mn>1</mn><msup><mn>2</mn><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+  p_{k} = \bar{p}\left( 1 - \dfrac{1}{2^{k+1}} \right).
+</annotation></semantics></math></p>
+<p>Since the probability mass function for a binomial distribution is
+well known, we can calculate the probability of observing the number of
+mismatched genotypes for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k=0</annotation></semantics></math>
+(same/twins),
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=1</annotation></semantics></math>
+(first-degree),
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math>
+(second-degree), and then a Poisson-weighted sum of the remaining values
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+to capture the third-degree or less related probability.</p>
+<p>When we have the probability of observing the number of mismatches we
+see, given a value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>X</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="prefix">|</mo><mi>K</mi><mo>=</mo><mi>k</mi><mo>,</mo><msub><mi>N</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">L(X_{ij} | K=k,N_{ij})</annotation></semantics></math>,
+and assuming a (user-defined) prior probability of relatedness, we then
+calculate a posterior probability of the degree of relatedness being
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+<em>given</em> the observed PMR.</p>
+</div>
+<div class="section level2">
+<h2 id="processing-your-data">Processing your data<a class="anchor" aria-label="anchor" href="#processing-your-data"></a>
+</h2>
 <p>An analysis would normally start by defining paths to all three
 Eigenstrat files, i.e.,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -102,6 +174,38 @@ overlapping sites (filter_length) from the default
 an option to only include individuals (pop_pattern) from certain
 populations (as defined in the ind file) and an option to remove C-&gt;T
 and G-&gt;A SNPs to avoid the effects of deamination.</p>
+</div>
+<div class="section level2">
+<h2 id="processing-only-pairs-within-groups-to-save-computational-effort">Processing only pairs within groups to save computational
+effort<a class="anchor" aria-label="anchor" href="#processing-only-pairs-within-groups-to-save-computational-effort"></a>
+</h2>
+<p>A new feature is the ability to process only pairs <em>within</em>
+the same populations (as per the populations defined in column three of
+the Eigenstrat ind file). This can be useful when populations should not
+be considered together as, for example, they may never have been able to
+be closely related due to vast distances in time or geography, and/or
+might have a different baseline PMR. When running the
+processEigenstrat() function, by setting the parameter
+<em>byPop=TRUE</em>, only individuals in the same population will have a
+PMR calculated. In the example data, individuals Ind1-Ind4 are in “Pop1”
+and individuals Ind5-Ind6 are in “Pop2”. This means that while each
+genotype of each individual will be read into BREADR, only the four
+individuals in Pop1 are compared to each other
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>3</mn><mi>/</mi><mn>2</mn><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">4\times 3/2 = 6</annotation></semantics></math>
+pairs) and only the two individuals in Pop2 are compared to each other
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>1</mn><mi>/</mi><mn>2</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2\times 1/2 =1</annotation></semantics></math>
+pairs), totaling 7 PMR calculations. This is less than the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn><mo>×</mo><mn>5</mn><mi>/</mi><mn>2</mn><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">6\times 5/2 = 15</annotation></semantics></math>
+pairs that would be calculated by default, more than halving the number
+of calculations. This saving in computational effort will be greater for
+large sample sizes. We also include a related parameter minMerge which
+defines the smallest possible “group” (default equals 2). This is to
+control the smallest group sizes as estimating a baseline PMR can be
+difficult for small groups (such as in Pop2 in the example data), and
+any groups with a sample size smaller than this parameter are merged
+into one group called “Merged” (hence you should avoid this as a
+population name in your Eigenstrat ind file when using this
+parameter).</p>
 <p>Note that since the Eigenstrat files are too large to include, we
 provide a pre-processed data set called <a href="https://github.com/jonotuke/BREADR/blob/master/data/counts_example.rda" class="external-link">counts_example</a>
 which is the product of running processEigenstrat() on real data
@@ -127,17 +231,21 @@ Github page</a>).</p>
 <span><span class="co">#&gt; 13 Ind4 - Ind5  6924     1451 0.2095609</span></span>
 <span><span class="co">#&gt; 14 Ind4 - Ind6  9745     2141 0.2197024</span></span>
 <span><span class="co">#&gt; 15 Ind5 - Ind6  1739      383 0.2202415</span></span></code></pre>
-<p>We can we can estimate the degrees of relatedness from the raw counts
-using the callRelatedness() function. Users have the option to change
-the prior probability for each degree of relatedness (class_prior) from
-the default uniform prior, to define the expected PMR
-(average_relatedness) for a pair of unrelated individuals from the
-default of the sample median, and to set the minimum number of
-overlapping SNPs required for a pair of individuals (filter_n) to be
-included in the analysis from the default of 1. If the user decides to
-use the sample median as an estimate for the expected PMR for a pair of
-unrelated individuals, the minimum number of overlapping SNPs for a pair
-(median_co) can be changed from the default of 500.</p>
+</div>
+<div class="section level2">
+<h2 id="calling-degrees-of-relatedness-from-counts">Calling degrees of relatedness from counts<a class="anchor" aria-label="anchor" href="#calling-degrees-of-relatedness-from-counts"></a>
+</h2>
+<p>We can estimate the degrees of relatedness from the raw counts using
+the callRelatedness() function. Users have the option to change the
+prior probability for each degree of relatedness (class_prior) from the
+default uniform prior, to define the expected PMR (average_relatedness)
+for a pair of unrelated individuals from the default of the sample
+median, and to set the minimum number of overlapping SNPs required for a
+pair of individuals (filter_n) to be included in the analysis from the
+default of 1. If the user decides to use the sample median as an
+estimate for the expected PMR for a pair of unrelated individuals, the
+minimum number of overlapping SNPs for a pair (median_co) can be changed
+from the default of 500.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">relatedness_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callRelatedness.html">callRelatedness</a></span><span class="op">(</span><span class="va">counts_example</span><span class="op">)</span></span>
 <span><span class="va">relatedness_example</span></span></code></pre></div>
@@ -160,56 +268,191 @@ unrelated individuals, the minimum number of overlapping SNPs for a pair
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>    14 Ind4 - In… Unrelated    0.220 0.004<span style="text-decoration: underline;">19</span>     <span style="text-decoration: underline;">2</span>141  <span style="text-decoration: underline;">9</span>745   0.218  2.95<span style="color: #949494;">e</span><span style="color: #BB0000;">-214</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>    15 Ind5 - In… Unrelated    0.220 0.009<span style="text-decoration: underline;">94</span>      383  <span style="text-decoration: underline;">1</span>739   0.218  3.64<span style="color: #949494;">e</span><span style="color: #BB0000;">- 39</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: First_Degree &lt;dbl&gt;, Second_Degree &lt;dbl&gt;, Unrelated &lt;dbl&gt;</span></span></span></code></pre>
-<p>An overall picture of the relatedness for these individuals can be
-created, which displays the highest posterior probability degree of
-relatedness for each pair of individuals, indicated by the colour and
-shape of the points with 95% confidence intervals. The dashed horizontal
-lines indicated the expected values for each degree of relatedness.</p>
-<p>Users can choose to remove individuals with less than a user-defined
-number of overlapping SNPs (nsnps_cutoff). In large data sets, it is
-expected that the vast majority of individuals will be unrelated, and so
-the user may wish to only plot the more closely related individuals. TO
-this end, the user may choose to plot only the first
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
-individuals (using the input parameter N), which have been sorted by PMR
-value, in ascending order.</p>
+<p>For each pair of individuals, a posterior probability for same/twins,
+first-degree, second-degree and unrelated will be calculated and
+reported in the final four columns. However, the relationship that is
+reported is simply the relationship that had the <em>highest posterior
+probability</em>, no matter how high the value of the second highest
+posterior probability is. In the section titled “Visualising the
+relatedness information for two individuals” we will see why it can be
+important to look at these values for “borderline” assignments, and how
+this can be easily done using BREADR.</p>
+</div>
+<div class="section level2">
+<h2 id="assessing-if-groups-can-be-merged">Assessing if groups can be merged<a class="anchor" aria-label="anchor" href="#assessing-if-groups-can-be-merged"></a>
+</h2>
+<p>We now also include a diagnostic plot to consider whether populations
+<em>can be merged</em>. We may wish to merge populations (we use
+population instead of group to match the Eigenstrat nomenclature for the
+third column of the IND file) if we have a small number of individuals,
+and wish to increase the <em>pairwise</em> sample size.</p>
+<p>The plotDOUGH() function takes as input your processEigenstrat()
+output (the raw counts) and produces side-by-side box plots/violin
+plots, comparing the PMR values <em>per population</em>, with associated
+non-parametric tests for whether the median PMR (which we use as a
+baseline level of relatedness by default in BREADR) differs between
+populations. When employing this function the user can set parameters
+for the font size on the x-axis (fntsize, default equals 7), the minimum
+number of overlapping SNPs for a pair to be included in the tests and
+plot (nsnps_cutoff, default is 500) and removeBetween. removeBetween
+forces the test to ignore the between-population PMR values, which may
+be useful.</p>
+<p>In cases where there are more than two populations, BREADR first
+performs a Kruskal-Wallis test to see if <em>any</em> population medians
+significantly differ (p-value in top-left), and then performs pairwise
+posthoc Dunn’s tests to identify <em>which</em> population medians are
+significantly different, with p-value adjustments performed using the
+Holm-Bonferroni method. Populations with significantly differently
+medians are then identified in the plot as bars above the population
+(with p-values). If there are only two population (and removeBetween is
+set to TRUE) then a Mann-Whitney U-test is performed and no bars will be
+shown even if the groups are significantly different, so the p-value in
+the title must be used to assess significance. If two populations are
+not significantly different, then they can, in theory, be merged.</p>
+<p>We run plotDOUGH() on our example in the following way:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">indfile1</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_package.html" class="external-link">path_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"BREADR"</span>, <span class="st">"extdata/example.ind.txt"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plotDOUGH.html">plotDOUGH</a></span><span class="op">(</span></span>
+<span>  <span class="va">counts_example</span>,</span>
+<span>  indfile <span class="op">=</span> <span class="va">indfile1</span>,</span>
+<span>  nsnps_cutoff <span class="op">=</span> <span class="fl">500</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="*__Figure 1__: plotDOUGH results for the example data set, with the Between Groups population kept.*" width="691.2"><p class="caption">
+<em><strong>Figure 1</strong>: plotDOUGH results for the example data
+set, with the Between Groups population kept.</em>
+</p>
+</div>
+<p>In this example (Figure 1), the Kruskal-Wallis test returns a p-value
+of 0.57 (&gt;0.05), indicating that there is no evidence that any
+population median is different, and hence our two populations can be
+merged. However, these non-parametric tests can lack statistical power
+for very small sample sizes, as might be the case here. However, as an
+example of when there is a difference, we modified the example data such
+that Pop1 and Pop2 cannot be merged. (Note that the “Between” groups PMR
+values are not significantly different from Pop1 or Pop2, but this is
+only because they are the average of the two groups, and in some sense
+should be ignored here).</p>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="*__Figure 2__: plotDOUGH results for the example data set where the PMR values have been artifically modified to yield different baseline (median) PMR values.*" width="691.2"><p class="caption">
+<em><strong>Figure 2</strong>: plotDOUGH results for the example data
+set where the PMR values have been artifically modified to yield
+different baseline (median) PMR values.</em>
+</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="visualising-overall-relatedness-patterns">Visualising overall relatedness patterns<a class="anchor" aria-label="anchor" href="#visualising-overall-relatedness-patterns"></a>
+</h2>
+<p>An overall picture of the relatedness for these individuals can be
+created (Figure 3), which displays the highest posterior probability
+degree of relatedness for each pair of individuals, indicated by the
+colour and shape of the points with 95% confidence intervals. The dashed
+horizontal lines indicated the expected values for each degree of
+relatedness.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotLOAF.html">plotLOAF</a></span><span class="op">(</span><span class="va">relatedness_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; No minimum number of overlapping SNPs given.</span></span>
 <span><span class="co">#&gt; Using default minimum of 500.</span></span>
 <span><span class="co">#&gt; No upper limit on number of pairs to plot given.</span></span>
 <span><span class="co">#&gt; Plotting first 15 pairs.</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="700"></p>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="*__Figure 3__: Pairwise diagnostic plot for relatedness call for Ind1 and Ind 2 called using the number option for row. (A) the distribution of PMR values given the number of overlapping SNPs (n=1518) for each degree of relatedness (filled colour), and the observed PMR with 95% confidence intervals. (B) relative posterior probabilities for all four possible assignments of degrees of relatedness. Note we added panel labels A and B using the labels parameter.*" width="691.2"><p class="caption">
+<em><strong>Figure 3</strong>: Pairwise diagnostic plot for relatedness
+call for Ind1 and Ind 2 called using the number option for row. (A) the
+distribution of PMR values given the number of overlapping SNPs (n=1518)
+for each degree of relatedness (filled colour), and the observed PMR
+with 95% confidence intervals. (B) relative posterior probabilities for
+all four possible assignments of degrees of relatedness. Note we added
+panel labels A and B using the labels parameter.</em>
+</p>
+</div>
+<p>Users can choose to remove individuals with less than a user-defined
+number of overlapping SNPs (nsnps_cutoff). In large data sets, it is
+expected that the vast majority of individuals will be unrelated, and so
+the user may wish to only plot the more closely related individuals. To
+this end, the user may choose to plot only the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+individuals (using the input parameter N), which have been sorted by PMR
+value, in ascending order.</p>
+</div>
+<div class="section level2">
+<h2 id="visualising-the-relatedness-information-for-two-individuals">Visualising the relatedness information for two individuals<a class="anchor" aria-label="anchor" href="#visualising-the-relatedness-information-for-two-individuals"></a>
+</h2>
+<p>A researcher may be interested in exploring the relatedness between
+two specific individuals in the analysis. These individuals may be
+especially important to the study or may have a PMR that is “uncertain”
+(i.e., falls between two of the expected values for degrees of
+relatedness).</p>
 <p>A plot for the assignment of the “Unrelated” degree of relatedness to
 individuals Ind1 and Ind2 can be produced which shows diagnostic
 information about the estimated genetic relatedness between a single
-pair of individuals. In the left panel, the distribution of PMR values
-for each degree of relatedness, given the number of overlapping SNPs,
-with the observed PMR (and 95% confidence interval) displayed below
-this. In the right panel are the normalised posterior probabilities for
-the each of the degrees of relatedness, indicating the certainty with
-which the degree of relatedness with the highest posterior probability
-was chosen.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 4428 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_ribbon()`).</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="700"></p>
-<p>Alternatively we can choose the row using the full pair name instead
-of the row number.</p>
+pair of individuals (Figure 4). In the left panel, the distribution of
+PMR values for each degree of relatedness, given the number of
+overlapping SNPs, with the observed PMR (and 95% confidence interval)
+displayed below this. In the right panel are the normalised posterior
+probabilities for each of the degrees of relatedness, indicating the
+certainty with which the degree of relatedness with the highest
+posterior probability was chosen.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 4428 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_ribbon()`).</span></span></code></pre></div>
-<p><img src="example-pipeline_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="700"></p>
-<p>We can test whether the observed PMR between Ind1 and Ind2 is
-consistent with a 3rd-degree genetic relationship, or not, but any
-degree of relatedness from 0 to 10 can be investigated. This function
-returns the p-value from the associated binomial test, and by setting
-verbose to TRUE, all diagnostic output from the test can be
-displayed</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>, <span class="st">'B'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="*__Figure 4__: Pairwise diagnostic plot for relatedness call for Ind1 and Ind 2 called using the text option for row. (A) the distribution of PMR values given the number of overlapping SNPs (n=1518) for each degree of relatedness (filled colour), and the observed PMR with 95% confidence intervals. (B) relative posterior probabilities for all four possible assignments of degrees of relatedness. Note we added panel labels A and B using the labels parameter.*" width="691.2"><p class="caption">
+<em><strong>Figure 4</strong>: Pairwise diagnostic plot for relatedness
+call for Ind1 and Ind 2 called using the text option for row. (A) the
+distribution of PMR values given the number of overlapping SNPs (n=1518)
+for each degree of relatedness (filled colour), and the observed PMR
+with 95% confidence intervals. (B) relative posterior probabilities for
+all four possible assignments of degrees of relatedness. Note we added
+panel labels A and B using the labels parameter.</em>
+</p>
+</div>
+<p>Alternatively we can create an identical plot, but this time choose
+the row using the full pair name instead of the row number (Figure
+5).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/test_degree.html">test_degree</a></span><span class="op">(</span><span class="va">relatedness_example</span>, <span class="fl">1</span>, <span class="fl">3</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plotSLICE.html">plotSLICE</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>, <span class="st">'B'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="*__Figure 5__: Pairwise diagnostic plot for relatedness call for Ind1 and Ind 2 called using the text option for row. (A) the distribution of PMR values given the number of overlapping SNPs (n=1518) for each degree of relatedness (filled colour), and the observed PMR with 95% confidence intervals. (B) relative posterior probabilities for all four possible assignments of degrees of relatedness. Note we added panel labels A and B using the labels parameter.*" width="691.2"><p class="caption">
+<em><strong>Figure 5</strong>: Pairwise diagnostic plot for relatedness
+call for Ind1 and Ind 2 called using the text option for row. (A) the
+distribution of PMR values given the number of overlapping SNPs (n=1518)
+for each degree of relatedness (filled colour), and the observed PMR
+with 95% confidence intervals. (B) relative posterior probabilities for
+all four possible assignments of degrees of relatedness. Note we added
+panel labels A and B using the labels parameter.</em>
+</p>
+</div>
+<p>From these we make the following observations. First, in panel A we
+see that the observed PMR falls between the distributions for
+second-degree and unrelated. Second, in panel B we see that the
+posterior probabilities for both assignments are relatively similar
+(even if the highest posterior assignment was reported as unrelated).
+Unfortunately, this is the limit of the resolution of BREADR, as we
+cannot assign a third-degree relationship.</p>
+</div>
+<div class="section level2">
+<h2 id="binomial-tests-for-degrees-of-relatedness">Binomial tests for degrees of relatedness<a class="anchor" aria-label="anchor" href="#binomial-tests-for-degrees-of-relatedness"></a>
+</h2>
+<p>Since we assume that the number of mismatches follows a binomial
+distribution, and since we know the expected rate of mismatch for any
+value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+we can test if the observed PMR is consistent with a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>k</mi><mtext mathvariant="normal">th</mtext></msup><annotation encoding="application/x-tex">k^{\text{th}}</annotation></semantics></math>-degree
+of relatedness using a binomial hypothesis test. This is done using the
+test_degree function where again the row of interest must be given, and
+the degree
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>)
+is specified.</p>
+<p>For example, we can test whether the observed PMR between Ind1 and
+Ind2 is consistent with a 3rd-degree genetic relationship, or not, but
+any degree of relatedness from 0 to 10 (including non-integer values)
+can be investigated. This function returns the p-value from the
+associated binomial test, and by setting verbose to TRUE, all diagnostic
+output from the test can be displayed.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/test_degree.html">test_degree</a></span><span class="op">(</span><span class="va">relatedness_example</span>, row <span class="op">=</span> <span class="fl">1</span>, degree <span class="op">=</span> <span class="fl">3</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Testing H0       : "Ind1 - Ind2" are 3rd-degree relatives.</span></span>
 <span><span class="co">#&gt; Expected PMR     : 0.2044</span></span>
 <span><span class="co">#&gt; Observed PMR     : 0.2042</span></span>
@@ -217,8 +460,148 @@ displayed</p>
 <span><span class="co">#&gt; p-value          : 0.9823</span></span>
 <span><span class="co">#&gt; Decision         : Retain H0</span></span>
 <span><span class="co">#&gt; [1] 0.9823165</span></span></code></pre></div>
+<p>Here we see that Ind1 and Ind2 yield a PMR consistent with a
+third-degree relationship (at the 5% significance level, as the p-value
+is greater than 0.05). If the verbose parameter is TRUE, then more than
+the p-value is returned. Specifically, we see (in order) the null
+hypothesis, the PMR we would expected for a third-degree relationship,
+the PMR we actually observed, the estimated degree of relatedness
+(calculated by inverting the equation for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mi>k</mi></msub><annotation encoding="application/x-tex">p_k</annotation></semantics></math>),
+the p-value and the decision for the test (at the 5% significance
+level).</p>
 </div>
-  </main>
+<div class="section level2">
+<h2 id="sensitivity-of-the-results-to-the-prior-distribution">Sensitivity of the results to the prior distribution<a class="anchor" aria-label="anchor" href="#sensitivity-of-the-results-to-the-prior-distribution"></a>
+</h2>
+<p>By default, BREADR sets the prior distribution for the four possible
+relatedness assignments as equally likely, or a uniform prior of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac></mrow><annotation encoding="application/x-tex">P(K=k) = \frac{1}{4}</annotation></semantics></math>.
+This is likely not reasonable in a random sample from a true population.
+However, an uninformative prior makes the least assumptions, and on a
+practical level, the PMR associated with same/twin or first-degree can
+often be overwhelmingly obvious for a sufficient number of overlapping
+sites. Further, some studies will contain random samples from
+populations, and hence twins will be very rare. Others samples may be
+from collective burials (for example), in which case elements from the
+same individuals may be extremely likely. Hence, we leave it to the user
+to decide on a sensible prior distribution, but concede that this can be
+difficult.</p>
+<p>To address this we include a function called priorSensitivity() to
+allow researchers to easily explore how sensitive the results of
+callRelatedness() are to the choice of the prior distribution. The
+function forms a grid of different prior probabilities to test, and then
+for each degree of relatedness, at each prior value, calculates the
+proportion of times each degree of relatedness would have been the
+“assigned” relationship (when all other priors are varied). Consider the
+example for Ind1 and Ind2 (row one) in the example data (Figure 6).</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">BREADR</span><span class="fu">::</span><span class="fu"><a href="../reference/priorSensitivity.html">priorSensitivity</a></span><span class="op">(</span></span>
+<span>  in_BREADR <span class="op">=</span> <span class="va">relatedness_example</span>,</span>
+<span>  row <span class="op">=</span> <span class="st">"Ind1 - Ind2"</span>,</span>
+<span>  degrees <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  grid_space <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  maxPrior <span class="op">=</span> <span class="fl">0.5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Starting sensitivity analysis (633 separate analyses)....</span></span>
+<span><span class="co">#&gt; "  |                                                                              |                                                                      |   0%  |                                                                              |                                                                      |   1%  |                                                                              |=                                                                     |   1%  |                                                                              |=                                                                     |   2%  |                                                                              |==                                                                    |   2%  |                                                                              |==                                                                    |   3%  |                                                                              |===                                                                   |   4%  |                                                                              |===                                                                   |   5%  |                                                                              |====                                                                  |   5%  |                                                                              |====                                                                  |   6%  |                                                                              |=====                                                                 |   6%  |                                                                              |=====                                                                 |   7%  |                                                                              |=====                                                                 |   8%  |                                                                              |======                                                                |   8%  |                                                                              |======                                                                |   9%  |                                                                              |=======                                                               |   9%  |                                                                              |=======                                                               |  10%  |                                                                              |=======                                                               |  11%  |                                                                              |========                                                              |  11%  |                                                                              |========                                                              |  12%  |                                                                              |=========                                                             |  12%  |                                                                              |=========                                                             |  13%  |                                                                              |==========                                                            |  14%  |                                                                              |==========                                                            |  15%  |                                                                              |===========                                                           |  15%  |                                                                              |===========                                                           |  16%  |                                                                              |============                                                          |  16%  |                                                                              |============                                                          |  17%  |                                                                              |============                                                          |  18%  |                                                                              |=============                                                         |  18%  |                                                                              |=============                                                         |  19%  |                                                                              |==============                                                        |  19%  |                                                                              |==============                                                        |  20%  |                                                                              |==============                                                        |  21%  |                                                                              |===============                                                       |  21%  |                                                                              |===============                                                       |  22%  |                                                                              |================                                                      |  22%  |                                                                              |================                                                      |  23%  |                                                                              |=================                                                     |  24%  |                                                                              |=================                                                     |  25%  |                                                                              |==================                                                    |  25%  |                                                                              |==================                                                    |  26%  |                                                                              |===================                                                   |  27%  |                                                                              |===================                                                   |  28%  |                                                                              |====================                                                  |  28%  |                                                                              |====================                                                  |  29%  |                                                                              |=====================                                                 |  29%  |                                                                              |=====================                                                 |  30%  |                                                                              |=====================                                                 |  31%  |                                                                              |======================                                                |  31%  |                                                                              |======================                                                |  32%  |                                                                              |=======================                                               |  32%  |                                                                              |=======================                                               |  33%  |                                                                              |=======================                                               |  34%  |                                                                              |========================                                              |  34%  |                                                                              |========================                                              |  35%  |                                                                              |=========================                                             |  35%  |                                                                              |=========================                                             |  36%  |                                                                              |==========================                                            |  37%  |                                                                              |==========================                                            |  38%  |                                                                              |===========================                                           |  38%  |                                                                              |===========================                                           |  39%  |                                                                              |============================                                          |  39%  |                                                                              |============================                                          |  40%  |                                                                              |============================                                          |  41%  |                                                                              |=============================                                         |  41%  |                                                                              |=============================                                         |  42%  |                                                                              |==============================                                        |  42%  |                                                                              |==============================                                        |  43%  |                                                                              |==============================                                        |  44%  |                                                                              |===============================                                       |  44%  |                                                                              |===============================                                       |  45%  |                                                                              |================================                                      |  45%  |                                                                              |================================                                      |  46%  |                                                                              |=================================                                     |  47%  |                                                                              |=================================                                     |  48%  |                                                                              |==================================                                    |  48%  |                                                                              |==================================                                    |  49%  |                                                                              |===================================                                   |  49%  |                                                                              |===================================                                   |  50%  |                                                                              |===================================                                   |  51%  |                                                                              |====================================                                  |  51%  |                                                                              |====================================                                  |  52%  |                                                                              |=====================================                                 |  52%  |                                                                              |=====================================                                 |  53%  |                                                                              |======================================                                |  54%  |                                                                              |======================================                                |  55%  |                                                                              |=======================================                               |  55%  |                                                                              |=======================================                               |  56%  |                                                                              |========================================                              |  56%  |                                                                              |========================================                              |  57%  |                                                                              |========================================                              |  58%  |                                                                              |=========================================                             |  58%  |                                                                              |=========================================                             |  59%  |                                                                              |==========================================                            |  59%  |                                                                              |==========================================                            |  60%  |                                                                              |==========================================                            |  61%  |                                                                              |===========================================                           |  61%  |                                                                              |===========================================                           |  62%  |                                                                              |============================================                          |  62%  |                                                                              |============================================                          |  63%  |                                                                              |=============================================                         |  64%  |                                                                              |=============================================                         |  65%  |                                                                              |==============================================                        |  65%  |                                                                              |==============================================                        |  66%  |                                                                              |===============================================                       |  66%  |                                                                              |===============================================                       |  67%  |                                                                              |===============================================                       |  68%  |                                                                              |================================================                      |  68%  |                                                                              |================================================                      |  69%  |                                                                              |=================================================                     |  69%  |                                                                              |=================================================                     |  70%  |                                                                              |=================================================                     |  71%  |                                                                              |==================================================                    |  71%  |                                                                              |==================================================                    |  72%  |                                                                              |===================================================                   |  72%  |                                                                              |===================================================                   |  73%  |                                                                              |====================================================                  |  74%  |                                                                              |====================================================                  |  75%  |                                                                              |=====================================================                 |  75%  |                                                                              |=====================================================                 |  76%  |                                                                              |======================================================                |  77%  |                                                                              |======================================================                |  78%  |                                                                              |=======================================================               |  78%  |                                                                              |=======================================================               |  79%  |                                                                              |========================================================              |  79%  |                                                                              |========================================================              |  80%  |                                                                              |========================================================              |  81%  |                                                                              |=========================================================             |  81%  |                                                                              |=========================================================             |  82%  |                                                                              |==========================================================            |  82%  |                                                                              |==========================================================            |  83%  |                                                                              |==========================================================            |  84%  |                                                                              |===========================================================           |  84%  |                                                                              |===========================================================           |  85%  |                                                                              |============================================================          |  85%  |                                                                              |============================================================          |  86%  |                                                                              |=============================================================         |  87%  |                                                                              |=============================================================         |  88%  |                                                                              |==============================================================        |  88%  |                                                                              |==============================================================        |  89%  |                                                                              |===============================================================       |  89%  |                                                                              |===============================================================       |  90%  |                                                                              |===============================================================       |  91%  |                                                                              |================================================================      |  91%  |                                                                              |================================================================      |  92%  |                                                                              |=================================================================     |  92%  |                                                                              |=================================================================     |  93%  |                                                                              |=================================================================     |  94%  |                                                                              |==================================================================    |  94%  |                                                                              |==================================================================    |  95%  |                                                                              |===================================================================   |  95%  |                                                                              |===================================================================   |  96%  |                                                                              |====================================================================  |  97%  |                                                                              |====================================================================  |  98%  |                                                                              |===================================================================== |  98%  |                                                                              |===================================================================== |  99%  |                                                                              |======================================================================|  99%  |                                                                              |======================================================================| 100%</span></span>
+<span><span class="co">#&gt; Collating results....</span></span>
+<span><span class="co">#&gt; Done.</span></span></code></pre></div>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="*__Figure 6__: sensitivity analysis for the relationship between Ind1 and Ind2. The prior probabilities for all degrees of relatedness are tested at values between 0.05 and 0.5. Bars indicate the proportion of times a degree of relatedness was the maximum posterior relationship. Here we see that higher prior probabilities for Second-Degree and Unrelated yield highest posterior probability assignments for those degrees of relatedness, respectively. Hence, we must consider these prior probabilities carefully when assigning this relationship.*" width="691.2"><p class="caption">
+<em><strong>Figure 6</strong>: sensitivity analysis for the relationship
+between Ind1 and Ind2. The prior probabilities for all degrees of
+relatedness are tested at values between 0.05 and 0.5. Bars indicate the
+proportion of times a degree of relatedness was the maximum posterior
+relationship. Here we see that higher prior probabilities for
+Second-Degree and Unrelated yield highest posterior probability
+assignments for those degrees of relatedness, respectively. Hence, we
+must consider these prior probabilities carefully when assigning this
+relationship.</em>
+</p>
+</div>
+<p>This output can be difficult to interpret at first, and so we explain
+it here in detail. From Figure 5 we can see two panels: 2nd-Degree and
+Unrelated, both with a y-axis from 0% to 100%, and an x-axis that goes
+from 0 to the (default) maximum tested prior probability of 0.5. For the
+prior probability value along the x-axis, we see a bar. The way to
+interpret the first bar (at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">x=0.05</annotation></semantics></math>)
+is: when the prior probability of <em>Unrelated</em> is fixed at 0.05,
+and across all other values that the other three prior values can be (so
+that all four prior probabilities sum to one), we see that the
+relationship between Ind1 and Ind2 is returned as “Unrelated”
+approximately 4% of time, “2nd-Degree” approximately 96% of the time,
+and never as “Same/Twins” or “1st-Degree”, as we never see the colours
+associated with them. We can see that the next bar
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>0.1</mn></mrow><annotation encoding="application/x-tex">x=0.1</annotation></semantics></math>)
+sees “2nd-degree” assigned most often, but less often than before. And
+this trend continues. A sensible interpretation of this is that as the
+prior probability of “Unrelated” increases, we see that the relationship
+between Ind1 and Ind2 is more likely to be called “Unrelated”, which
+makes sense. We also see that we would need a prior probability of
+unrelated of at least 0.25 to call an unrelated relationship.</p>
+<p>Since Same/Twins and 1st-degree is never called, the top panel for
+2nd-Degree effectively shows the inverse of the bottom panel.
+Unfortunately this sensitivity analysis shows us that the outcome of
+BREADR is strongly affected by the prior distribution here, which makes
+sense since it appears as if the relationship is potentially
+third-degree.</p>
+<p>To give an example of when a degree of relatedness is not affected by
+the choice of prior probabilities, we produce a sensitivity analysis for
+Ind3 and Ind4 (Figure 7), who are unambiguously Same/Twins with
+posterior probability one (to machine precision). We also decrease the
+grid spacing (grid_space=0.025) to have a finer-scale analysis (at the
+cost of computational time). Here we can see that no matter how we set
+the prior distribution for Same/Twins, even as low as 0.025, we still
+always assign Same/Twins. Hence, this assignment is free of any affect
+from the prior distribution.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">BREADR</span><span class="fu">::</span><span class="fu"><a href="../reference/priorSensitivity.html">priorSensitivity</a></span><span class="op">(</span></span>
+<span>  in_BREADR <span class="op">=</span> <span class="va">relatedness_example</span>,</span>
+<span>  row <span class="op">=</span> <span class="st">"Ind3 - Ind4"</span>,</span>
+<span>  degrees <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>  grid_space <span class="op">=</span> <span class="fl">0.025</span>,</span>
+<span>  maxPrior <span class="op">=</span> <span class="fl">0.5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Starting sensitivity analysis (5263 separate analyses)....</span></span>
+<span><span class="co">#&gt; "  |                                                                              |                                                                      |   0%  |                                                                              |                                                                      |   1%  |                                                                              |=                                                                     |   1%  |                                                                              |=                                                                     |   2%  |                                                                              |==                                                                    |   2%  |                                                                              |==                                                                    |   3%  |                                                                              |==                                                                    |   4%  |                                                                              |===                                                                   |   4%  |                                                                              |===                                                                   |   5%  |                                                                              |====                                                                  |   5%  |                                                                              |====                                                                  |   6%  |                                                                              |=====                                                                 |   6%  |                                                                              |=====                                                                 |   7%  |                                                                              |=====                                                                 |   8%  |                                                                              |======                                                                |   8%  |                                                                              |======                                                                |   9%  |                                                                              |=======                                                               |   9%  |                                                                              |=======                                                               |  10%  |                                                                              |=======                                                               |  11%  |                                                                              |========                                                              |  11%  |                                                                              |========                                                              |  12%  |                                                                              |=========                                                             |  12%  |                                                                              |=========                                                             |  13%  |                                                                              |=========                                                             |  14%  |                                                                              |==========                                                            |  14%  |                                                                              |==========                                                            |  15%  |                                                                              |===========                                                           |  15%  |                                                                              |===========                                                           |  16%  |                                                                              |============                                                          |  16%  |                                                                              |============                                                          |  17%  |                                                                              |============                                                          |  18%  |                                                                              |=============                                                         |  18%  |                                                                              |=============                                                         |  19%  |                                                                              |==============                                                        |  19%  |                                                                              |==============                                                        |  20%  |                                                                              |==============                                                        |  21%  |                                                                              |===============                                                       |  21%  |                                                                              |===============                                                       |  22%  |                                                                              |================                                                      |  22%  |                                                                              |================                                                      |  23%  |                                                                              |================                                                      |  24%  |                                                                              |=================                                                     |  24%  |                                                                              |=================                                                     |  25%  |                                                                              |==================                                                    |  25%  |                                                                              |==================                                                    |  26%  |                                                                              |===================                                                   |  26%  |                                                                              |===================                                                   |  27%  |                                                                              |===================                                                   |  28%  |                                                                              |====================                                                  |  28%  |                                                                              |====================                                                  |  29%  |                                                                              |=====================                                                 |  29%  |                                                                              |=====================                                                 |  30%  |                                                                              |=====================                                                 |  31%  |                                                                              |======================                                                |  31%  |                                                                              |======================                                                |  32%  |                                                                              |=======================                                               |  32%  |                                                                              |=======================                                               |  33%  |                                                                              |=======================                                               |  34%  |                                                                              |========================                                              |  34%  |                                                                              |========================                                              |  35%  |                                                                              |=========================                                             |  35%  |                                                                              |=========================                                             |  36%  |                                                                              |==========================                                            |  36%  |                                                                              |==========================                                            |  37%  |                                                                              |==========================                                            |  38%  |                                                                              |===========================                                           |  38%  |                                                                              |===========================                                           |  39%  |                                                                              |============================                                          |  39%  |                                                                              |============================                                          |  40%  |                                                                              |============================                                          |  41%  |                                                                              |=============================                                         |  41%  |                                                                              |=============================                                         |  42%  |                                                                              |==============================                                        |  42%  |                                                                              |==============================                                        |  43%  |                                                                              |==============================                                        |  44%  |                                                                              |===============================                                       |  44%  |                                                                              |===============================                                       |  45%  |                                                                              |================================                                      |  45%  |                                                                              |================================                                      |  46%  |                                                                              |=================================                                     |  46%  |                                                                              |=================================                                     |  47%  |                                                                              |=================================                                     |  48%  |                                                                              |==================================                                    |  48%  |                                                                              |==================================                                    |  49%  |                                                                              |===================================                                   |  49%  |                                                                              |===================================                                   |  50%  |                                                                              |===================================                                   |  51%  |                                                                              |====================================                                  |  51%  |                                                                              |====================================                                  |  52%  |                                                                              |=====================================                                 |  52%  |                                                                              |=====================================                                 |  53%  |                                                                              |=====================================                                 |  54%  |                                                                              |======================================                                |  54%  |                                                                              |======================================                                |  55%  |                                                                              |=======================================                               |  55%  |                                                                              |=======================================                               |  56%  |                                                                              |========================================                              |  56%  |                                                                              |========================================                              |  57%  |                                                                              |========================================                              |  58%  |                                                                              |=========================================                             |  58%  |                                                                              |=========================================                             |  59%  |                                                                              |==========================================                            |  59%  |                                                                              |==========================================                            |  60%  |                                                                              |==========================================                            |  61%  |                                                                              |===========================================                           |  61%  |                                                                              |===========================================                           |  62%  |                                                                              |============================================                          |  62%  |                                                                              |============================================                          |  63%  |                                                                              |============================================                          |  64%  |                                                                              |=============================================                         |  64%  |                                                                              |=============================================                         |  65%  |                                                                              |==============================================                        |  65%  |                                                                              |==============================================                        |  66%  |                                                                              |===============================================                       |  66%  |                                                                              |===============================================                       |  67%  |                                                                              |===============================================                       |  68%  |                                                                              |================================================                      |  68%  |                                                                              |================================================                      |  69%  |                                                                              |=================================================                     |  69%  |                                                                              |=================================================                     |  70%  |                                                                              |=================================================                     |  71%  |                                                                              |==================================================                    |  71%  |                                                                              |==================================================                    |  72%  |                                                                              |===================================================                   |  72%  |                                                                              |===================================================                   |  73%  |                                                                              |===================================================                   |  74%  |                                                                              |====================================================                  |  74%  |                                                                              |====================================================                  |  75%  |                                                                              |=====================================================                 |  75%  |                                                                              |=====================================================                 |  76%  |                                                                              |======================================================                |  76%  |                                                                              |======================================================                |  77%  |                                                                              |======================================================                |  78%  |                                                                              |=======================================================               |  78%  |                                                                              |=======================================================               |  79%  |                                                                              |========================================================              |  79%  |                                                                              |========================================================              |  80%  |                                                                              |========================================================              |  81%  |                                                                              |=========================================================             |  81%  |                                                                              |=========================================================             |  82%  |                                                                              |==========================================================            |  82%  |                                                                              |==========================================================            |  83%  |                                                                              |==========================================================            |  84%  |                                                                              |===========================================================           |  84%  |                                                                              |===========================================================           |  85%  |                                                                              |============================================================          |  85%  |                                                                              |============================================================          |  86%  |                                                                              |=============================================================         |  86%  |                                                                              |=============================================================         |  87%  |                                                                              |=============================================================         |  88%  |                                                                              |==============================================================        |  88%  |                                                                              |==============================================================        |  89%  |                                                                              |===============================================================       |  89%  |                                                                              |===============================================================       |  90%  |                                                                              |===============================================================       |  91%  |                                                                              |================================================================      |  91%  |                                                                              |================================================================      |  92%  |                                                                              |=================================================================     |  92%  |                                                                              |=================================================================     |  93%  |                                                                              |=================================================================     |  94%  |                                                                              |==================================================================    |  94%  |                                                                              |==================================================================    |  95%  |                                                                              |===================================================================   |  95%  |                                                                              |===================================================================   |  96%  |                                                                              |====================================================================  |  96%  |                                                                              |====================================================================  |  97%  |                                                                              |====================================================================  |  98%  |                                                                              |===================================================================== |  98%  |                                                                              |===================================================================== |  99%  |                                                                              |======================================================================|  99%  |                                                                              |======================================================================| 100%</span></span>
+<span><span class="co">#&gt; Collating results....</span></span>
+<span><span class="co">#&gt; Done.</span></span></code></pre></div>
+<div class="figure">
+<img src="example-pipeline_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="*__Figure 7__: sensitivity analysis for the relationship between Ind3 and Ind4. The prior probabilities for all degrees of relatedness are tested at values between 0.05 and 0.5. Bars indicate the proportion of times a degree of relatedness was the maximum posterior relationship, and the dashed black line indicates 50%. This clearly shows that no matter the prior probability values for any of the degrees of relatedness, the highest posterior probability assignment is always Same/Twins.*" width="691.2"><p class="caption">
+<em><strong>Figure 7</strong>: sensitivity analysis for the relationship
+between Ind3 and Ind4. The prior probabilities for all degrees of
+relatedness are tested at values between 0.05 and 0.5. Bars indicate the
+proportion of times a degree of relatedness was the maximum posterior
+relationship, and the dashed black line indicates 50%. This clearly
+shows that no matter the prior probability values for any of the degrees
+of relatedness, the highest posterior probability assignment is always
+Same/Twins.</em>
+</p>
+</div>
+<p>The priorSensitivity() function can also be adjusted with input
+parameters. First, we can focus on any combination of the degrees of
+relatedness, and a vector containing any combination of 1, 2, 3 or 4
+will specify Same/Twin, 1st-Degree, 2nd-Degree or Unrelated to be
+explored, respectively. For example, to look at just the affect on
+calling Same/Twins, set degree=1, or for 2nd-Degree <em>and</em>
+Unrelated, degree=c(3,4). Second, the maximum value for the prior
+probability (the upper bound of the x-axis) can be changed using the
+maxPrior parameter (default is 0.5). Finally, grid_space defines the
+space between tested prior probability values (the width of the bars on
+the x-axis). The smaller this number, the more bars are calculated, but
+this comes at the expense of computational time (default is 0.05).</p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
+<p>The authors wish to thank Beatriz Amorim for help testing the
+functionality of BREADR, and Prof. Nigel Bean and Dr. Vincent
+Braunack-Mayer for enlightening and instructive conversations.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
